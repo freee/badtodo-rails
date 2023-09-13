@@ -20,7 +20,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       TZ: "Asia/Tokyo"
     ports:
-      - "3306:3306"
+      - "3307:3306"
   front:
     build: ./frontend/
     volumes:
