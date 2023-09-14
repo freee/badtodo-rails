@@ -1,4 +1,5 @@
 import React from "react"
+import {useEffect} from "react";
 export default function Profile(props:any){
     const password = Array(props.password.length).fill('*');
     return(
@@ -13,3 +14,4 @@ export default function Profile(props:any){
         </div>
     );
 }
+///

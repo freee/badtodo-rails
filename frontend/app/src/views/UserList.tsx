@@ -8,7 +8,7 @@ interface PeopleInformation{
     icon:string;
     authentication:string;
 }
-export default function UserList(props:any){
+function UserList(props:any){
     var people : PeopleInformation[] = props.people; 
     const information = people.map((person,index)=>
     <tr key={index}>
@@ -29,3 +29,4 @@ export default function UserList(props:any){
     </div>
     );
 }
+export default UserList;
