@@ -6,7 +6,7 @@ import axios from 'axios';
 import e from "express";
 interface ToDoInformationList{
     todos:ToDoInformation[];
-    todoTable:HTMLTableRowElement[];
+    todoTable:JSX.Element[];
 }
 interface ToDoInformation{
     id:string;
@@ -27,13 +27,12 @@ const initialToDoInformation: ToDoInformation={
     public:''
 }
 export const ToDoList: React.FC = () => {
-	const [formData, setFormData] = useState<ToDoInformationList>();
+	const [formData, setFormData] = useState<ToDoInformationList>({todos:[],todoTable:[]});
     useEffect(()=> {
-        fetch('http://localhost:3000/todos',{method:'GET'})
+        fetch('http://localhost:3001/todos',{method:'GET'})
         .then(res=>res.json())
         .then(data=>{
-            setFormData({todos:data})
-            let information = data.map((todo,index)=>
+            let information = data.map((todo:ToDoInformation,index:number)=>
             <tr key={index}>
                 <td><input type="checkbox"/></td>
                 <td>{todo.id}</td>
@@ -46,6 +45,7 @@ export const ToDoList: React.FC = () => {
             </tr>
         )
         setFormData({
+            ...formData,
             todoTable: information,
             todos: data
         })
