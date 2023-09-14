@@ -6,6 +6,7 @@ import Router from './router/index';
 import Inquery from './views/Inquery'
 import ToDoList from './views/NewToDo'
 import { addSyntheticLeadingComment } from 'typescript';
+import {Navbar} from './components/Navbar';
 interface ToDoInformation{
   id:string;
   todo:string;
@@ -18,6 +19,7 @@ interface ToDoInformation{
 interface ToDoInformationList{
   todos:ToDoInformation[];
 }
+
 function App() {
   const firstToDo :ToDoInformation    = { id:"admin",  todo:"パソコンを買う",register:"2023-09-12",expire:"2023-09-13",complete:"", attach:"",public:"OK"};
   const secondToDo :ToDoInformation   = { id:"normal", todo:"依頼の原稿を書く",register:"2023-09-12",expire:"2023-0919",complete:"",attach:"",public:"OK"};
@@ -27,6 +29,10 @@ function App() {
       {/* <Profile todos = {todos}/> */}
       {/* <h1>Worst Todo</h1> */}
      {/* <Router></Router> */}
+      <h1>Worst Todo</h1>
+      {/* loginしてる時は trueを渡す */}
+      {/* <Navbar loggedIn={true} isAdmin={true}/> */}
+      <Router></Router>
     </div>
   );
 }
