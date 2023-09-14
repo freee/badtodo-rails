@@ -26,5 +26,7 @@ RUN groupadd -g 1002 app \
   && useradd -m -u 1001 -g 1002 app
 USER app
 
+RUN rails db:create && rails db:migrate && rails db:seed
+
 CMD ["/startup.sh"]
 
