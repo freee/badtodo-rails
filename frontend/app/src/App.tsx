@@ -9,7 +9,7 @@ function App() {
     <div>
       <h1>Worst Todo</h1>
       <Navbar loggedIn={true} isAdmin={true}/>
-      <Router></Router>
+      <Router isAdmin={true} loggedIn={true}/>
     </div>
   );
 }

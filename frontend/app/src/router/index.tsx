@@ -6,15 +6,33 @@ import NewToDo from '../views/NewToDo';
 import Profile from '../views/Profile';
 import ToDoList from '../views/ToDoList';
 import UserListView from '../views/UserListView';
+import Login from '../views/Login';
 
-function Router() {
+type UserInfo = {
+	isAdmin:boolean;
+	loggedIn:boolean;
+}
+
+const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
-			<Route path="/register" element={<Register isAdmin={true}/>} />
+			<Route path="/register" element={<Register isAdmin={isAdmin}/>} />
 			<Route path="/contact" element={<Inquery />}/>
 			<Route path="/new-todo" element={<NewToDo />}/>
-			<Route path="/member-management" element={<UserListView />}/>
+			{!loggedIn && (
+				<Route path="/login" element={<Login />}/>
+			)}
+			{loggedIn && (
+				<>
+					<Route path="/mypage" element={<Profile />}/>
+					{isAdmin && (
+						<Route path="/member-management" element={<UserListView />}/>
+					)}
+					
+				</>
+				
+        	)}
 		</Routes>
 	);
 }
