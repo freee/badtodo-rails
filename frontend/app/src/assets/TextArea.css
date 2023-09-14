@@ -1,0 +1,70 @@
+.TextArea{
+    display: inline-block;
+    width:100%;
+    border:1px solid #999;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    margin:0.5em 0;
+    line-height: 1.5;
+    height: 6em;
+}
+
+.Text{
+    display: inline-block;
+    width:90%;
+    padding:5px;
+    border:1px solid #999;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    margin:0.5em 0;
+}
+
+table {
+    width:100%;
+    border-collapse: collapse;
+ }
+ 
+th {
+    padding:5px;
+    font-size:12px;
+    text-align:left;
+    border:1px solid #ddd;
+    background-color: #cfcfcf;
+ }
+ 
+td {
+    padding:5px;
+    font-size:12px;
+    text-align:left;
+    border:1px solid #ddd;
+ }
+ 
+table {
+    width:100%;
+    border-collapse: collapse;
+ }
+ 
+th {
+    padding:5px;
+    font-size:12px;
+    text-align:left;
+    border:1px solid #ddd;
+    background-color: #cfcfcf;
+ }
+ 
+td {
+    padding:5px;
+    font-size:12px;
+    text-align:left;
+    border:0px;
+ }
+
+ button{
+    margin: 2px;
+ }
+
+ .search{
+    align-items:right;
+    float: right;
+    padding-bottom:10px;
+ }
