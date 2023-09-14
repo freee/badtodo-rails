@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios';
+import { AxiosResponse } from 'axios';
+import { appendFile } from 'fs';
 
 interface FormState {
 	userId: string;
@@ -23,6 +27,7 @@ const initialFormState: FormState = {
 
 export const Register: React.FC<RegisterProps> = ({isAdmin}) => {
 	const [formData, setFormData] = useState<FormState>(initialFormState);
+	const navigate = useNavigate();
 
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -42,9 +47,24 @@ export const Register: React.FC<RegisterProps> = ({isAdmin}) => {
 		});
 	};
 
+	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		
+		try{
+			const response: AxiosResponse<any> = await api.post('/auth',{
+				...formData
+			});
+
+			console.log(response.data);
+			navigate('/');
+		}catch (error){
+			console.error(error);
+		}
+	};
+
 	return (
 		<div>
-			<form>
+			<form onSubmit={handleLogin}>
 				<div>
 					<label>
 						User ID:
