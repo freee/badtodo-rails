@@ -1,6 +1,5 @@
 import UserField from "../components/UserField"
 import React from "react"
-import './Login.css';
 export default function Login(){
     return(
     <div className="loginContainer">

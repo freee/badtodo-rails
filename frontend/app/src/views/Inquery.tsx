@@ -1,4 +1,4 @@
-
+import '../assets/TextArea.css'
 export default function Inquery(){
     return (
    <div>
@@ -13,7 +13,7 @@ export default function Inquery(){
     <td>氏名</td><td><input name="name" placeholder="氏名（必須）"/></td>
     </tr>
     <tr>
-    <td>質問内容</td><td><textarea name="question" placeholder="お問い合わせ内容（必須）"></textarea></td>
+    <td>質問内容</td><td><textarea className = "TextArea" name="question" placeholder="お問い合わせ内容（必須）"></textarea></td>
     </tr>
     <tr>
     <td></td><td><input type="submit" value="送信"/></td>
