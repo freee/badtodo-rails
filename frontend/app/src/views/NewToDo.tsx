@@ -1,5 +1,8 @@
 import '../assets/TextArea.css'
 import React, { useState } from 'react';
+import api from '../api/axios';
+import { AxiosResponse } from 'axios';
+import { useNavigate } from 'react-router';
 
 interface FormState {
 	todo: string;
@@ -26,6 +29,7 @@ const initialFormState: FormState = {
 };
 export default function NewToDo(){
     const [formData, setFormData] = useState<FormState>(initialFormState);
+    const navigate = useNavigate();
 
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -43,9 +47,26 @@ export default function NewToDo(){
 			attach:file || null,
 		});
 	};
+
+    const handleTodoCreate = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		
+		try{
+			const response: AxiosResponse<any> = await api.post('/todos',{
+				"todo": formData
+			});
+
+			console.log(response.data);
+			navigate('/');
+		}catch (error){
+			console.error(error);
+		}
+	};
+
     return (
     <div>
     todo新規登録
+    <form onSubmit={handleTodoCreate}>
     <table>
     <tr>
     <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
@@ -72,6 +93,7 @@ export default function NewToDo(){
     <td></td><td><input type="submit" value="登録"/></td>
     </tr>
     </table>
+    </form>
     </div>
     );
 }
