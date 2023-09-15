@@ -46,7 +46,10 @@ export const WhatToDo: React.FC = () => {
             return response;
         }
     fetchData();
-    });
+    },[]);
+    const edit =()=>{
+        navigate('/update-todo/'+id);
+    }
     return(
     <div>
         <form>
@@ -62,7 +65,7 @@ export const WhatToDo: React.FC = () => {
                 <tr><td>公開</td><td>{formData.public}</td></tr>
                 </tbody>
             </table><br/>
-                <button type="submit" name="process" value="dellist">削除</button>
+                <button type="submit" name="process" value="dellist" onClick = {edit}>編集</button>
         </form>
         <br/>
     </div>

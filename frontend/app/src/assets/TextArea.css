@@ -20,7 +20,11 @@ textarea{
 
 .Sub{
     align-items:center;
-    width:100%;
+    width:1000px;
+    background-color: #fff;
+}
+.formTable{
+    width:60%;
 }
 Text{
     display: inline-block;
@@ -32,7 +36,7 @@ Text{
     margin:0.5em 0;
 }
 table {
-    width:70%;
+    width:100px;
     border-collapse: collapse;
  }
 th {
@@ -51,7 +55,7 @@ td {
  }
  
 table {
-    width:50%;
+    width:100%;
     border-collapse: collapse;
  }
  
