@@ -40,7 +40,7 @@ export const Login:React.FC<any>=({setLoggedIn,setIsAdmin})=>{
 				"email": formData.email,
                 "password": formData.password
 			})
-            localStorage.setItem("token",response.headers["authorization"]);
+            localStorage.setItem("token",response.headers["authorization"].slice(7));
             setLoggedIn(true);
             // Todo responseにフラグを立ててそれを読み取る
             setIsAdmin(false);
