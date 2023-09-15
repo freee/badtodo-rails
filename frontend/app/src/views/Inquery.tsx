@@ -26,7 +26,7 @@ export const Inquery=()=>{
 		});
 	};
     return (
-   <div>
+   <form className="Sub">
     <table>
     <tr>
     <td>件名</td><td><input name="subject" placeholder={formData.title} onChange={handleInputChange}/></td>
@@ -44,7 +44,7 @@ export const Inquery=()=>{
     <td></td><td><input type="submit" value="送信"/></td>
     </tr>
     </table>
-   </div> 
+   </form> 
    );
 }
 

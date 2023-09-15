@@ -1,15 +1,28 @@
 .TextArea{
     display: inline-block;
-    width:100%;
+    width:50%;
     border:1px solid #999;
     box-sizing: border-box;
-    background: #f2f2f2;
+    background: #ffffff;
     margin:0.5em 0;
     line-height: 1.5;
     height: 6em;
 }
 
-.Text{
+textarea{
+    display: inline-block;
+    width:100%;
+    border:1px solid #999;
+    box-sizing: border-box;
+    background: #fff;
+    margin:0.5em 0;
+}
+
+.Sub{
+    align-items:center;
+    width:100%;
+}
+Text{
     display: inline-block;
     width:90%;
     padding:5px;
@@ -18,25 +31,24 @@
     background: #f2f2f2;
     margin:0.5em 0;
 }
+table {
+    width:70%;
+    border-collapse: collapse;
+ }
+th {
+    padding:5px;
+    font-size:18px;
+    text-align:left;
+    border:1px solid #ddd;
+    background-color: #cfcfcf;
+ }
 
-table {
-    width:100%;
-    border-collapse: collapse;
- }
- 
-th {
-    padding:5px;
-    font-size:12px;
-    text-align:left;
-    border:1px solid #ddd;
-    background-color: #cfcfcf;
- }
- 
 td {
     padding:5px;
-    font-size:12px;
+    font-size:18px;
     text-align:left;
-    border:1px solid #ddd;
+    border:1px solid;
+    /* border:1px solid #ddd; */
  }
  
 table {
@@ -46,7 +58,7 @@ table {
  
 th {
     padding:5px;
-    font-size:12px;
+    font-size:18px;
     text-align:left;
     border:1px solid #ddd;
     background-color: #cfcfcf;
@@ -54,9 +66,9 @@ th {
  
 td {
     padding:5px;
-    font-size:12px;
+    font-size:18px;
     text-align:left;
-    border:0px;
+    /* border:0px; */
  }
 
  button{
