@@ -8,6 +8,7 @@ import ToDoList from '../views/ToDoList';
 import UserListView from '../views/UserListView';
 import Login from '../views/Login';
 import WhatToDo from '../views/WhatToDo'
+import UpdateToDo from '../views/UpdateToDo';
 import '../assets/Common.css';
 type UserInfo = {
 	isAdmin:boolean;
@@ -23,6 +24,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
 			<Route path="/contact" element={<Inquery />}/>
 			<Route path="/new-todo" element={<NewToDo />}/>
 			<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
+			<Route path={"/update-todo/:id?"} element={<UpdateToDo />}/>
 			<Route path={"/todo-list"} element={<ToDoList/>}/>
 			{!loggedIn && (
 				<Route path="/login" element={<Login />}/>
