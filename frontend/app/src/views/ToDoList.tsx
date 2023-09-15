@@ -38,7 +38,7 @@ export const ToDoList: React.FC = () => {
             <tr key={index}>
                 <td><input type="checkbox"/></td>
                 <td>{todo.id}</td>
-                <td><Link to ='/what-todo' state={todo.id}>{todo.todo}</Link></td>
+                <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
                 <td>{todo.register}</td>
                 <td>{todo.expire}</td>
                 <td>{todo.complete}</td>

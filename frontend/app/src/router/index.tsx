@@ -23,6 +23,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
 			<Route path="/contact" element={<Inquery />}/>
 			<Route path="/new-todo" element={<NewToDo />}/>
 			<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
+			<Route path={"/todo-list"} element={<ToDoList/>}/>
 			{!loggedIn && (
 				<Route path="/login" element={<Login />}/>
 			)}
