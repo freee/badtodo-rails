@@ -12,9 +12,11 @@ import '../assets/Common.css';
 type UserInfo = {
 	isAdmin:boolean;
 	loggedIn:boolean;
+	setLoggedIn:any;
+	setIsAdmin:any;
 }
 
-const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
+const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,setLoggedIn,setIsAdmin}) => {
 	return (
 		<div>
 		<Routes>
@@ -25,7 +27,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
 			<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
 			<Route path={"/todo-list"} element={<ToDoList/>}/>
 			{!loggedIn && (
-				<Route path="/login" element={<Login />}/>
+				<Route path="/login" element={<Login setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin}/>}/>
 			)}
 			{loggedIn && (
 				<>
