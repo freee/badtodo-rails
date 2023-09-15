@@ -10,7 +10,7 @@ interface userInformation{
     mail:string,
     password:string,
     icon:string,
-    isAdmin:boolean
+    is_admin:boolean
 }
 type Params={
     id?:string;
@@ -20,21 +20,24 @@ const InitialuserInformation : userInformation = {
     mail:'',
     password:'',
     icon:'',
-    isAdmin:false
+    is_admin:false
+}
+interface userInformationList{
+    users:userInformation[];
 }
 export default function Profile(props:any){
     const {id} = useParams<Params>();;
     const [formData,setFormData] = useState<userInformation>(InitialuserInformation);
     useEffect(()=>{
-        async function fetchData(){
-            const response: AxiosResponse<any> = await api.get('/users/'+id);
-            const password = Array(response.data.password.length).fill("*");
-            response.data.password = password;
-            setFormData(response.data);console.log(response.data);
-            return response;
-        }
-    fetchData();
-    },[]);
+        fetch('http://localhost:3001/todos',{method:'GET'})
+        .then(res=>res.json())
+        .then(data=>{
+            let information = data.map((todo:userInformation,index:number)=>
+                {if(todo.id == Number(id)){ setFormData(todo)}}
+        )
+        })
+        },
+    []);
     return(
         <div>
             <table>
@@ -43,7 +46,7 @@ export default function Profile(props:any){
                 <tr><td>メールアドレス</td><td>{formData.mail}</td></tr>
                 <tr><td>パスワード</td><td>{formData.password}</td></tr>
                  <tr><td>アイコン</td><td><img src = {formData.icon}/></td></tr> 
-                <tr><td>利用者権限</td><td>{formData.isAdmin}</td></tr>
+                <tr><td>利用者権限</td><td>{formData.is_admin}</td></tr>
                 </tbody>
             </table>
         </div>
