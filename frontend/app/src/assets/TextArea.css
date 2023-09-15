@@ -47,12 +47,11 @@ td {
     padding:5px;
     font-size:18px;
     text-align:left;
-    border:1px solid;
     /* border:1px solid #ddd; */
  }
  
 table {
-    width:100%;
+    width:50%;
     border-collapse: collapse;
  }
  

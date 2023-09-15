@@ -51,15 +51,15 @@ export const WhatToDo: React.FC = () => {
     <div>
         <form>
             <table><tbody>
-                <tr><th>ID</th><td>{id}<img src={formData.icon}/></td></tr>
-                <tr><th>todo</th><td>{formData.todo}</td></tr>
-                <tr><th>登録日</th><td>{formData.register}</td></tr>
-                <tr><th>期限</th><td>{formData.expire}</td></tr>
-                <tr><th>完了</th><td>{formData.complete}</td></tr>
-                <tr><th>メモ</th><td>{formData.memo}</td></tr>
-                <tr><th>添付ファイル</th><td>{formData.attach}</td></tr>
-                <tr><th>URL</th><td>{formData.url}</td></tr>
-                <tr><th>公開</th><td>{formData.public}</td></tr>
+                <tr><td>ID</td><td>{id}<img src={formData.icon}/></td></tr>
+                <tr><td>todo</td><td>{formData.todo}</td></tr>
+                <tr><td>登録日</td><td>{formData.register}</td></tr>
+                <tr><td>期限</td><td>{formData.expire}</td></tr>
+                <tr><td>完了</td><td>{formData.complete}</td></tr>
+                <tr><td>メモ</td><td>{formData.memo}</td></tr>
+                <tr><td>添付ファイル</td><td>{formData.attach}</td></tr>
+                <tr><td>URL</td><td>{formData.url}</td></tr>
+                <tr><td>公開</td><td>{formData.public}</td></tr>
                 </tbody>
             </table><br/>
                 <button type="submit" name="process" value="dellist">削除</button>
