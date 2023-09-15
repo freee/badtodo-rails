@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  owner: 1
+  user_id: 1
   todo: MyText
   c_date: 2023-09-14
   due_date: 2023-09-14
@@ -14,7 +14,7 @@ one:
   public: false
 
 two:
-  owner: 1
+  user_id: 1
   todo: MyText
   c_date: 2023-09-14
   due_date: 2023-09-14
