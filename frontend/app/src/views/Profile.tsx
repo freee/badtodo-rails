@@ -7,9 +7,9 @@ import { userInfo } from "os";
 import {useParams} from 'react-router'
 interface userInformation{
     id:number,
-    mail:string,
+    email:string,
     password:string,
-    icon:string,
+    image:string,
     is_admin:boolean
 }
 type Params={
@@ -17,9 +17,9 @@ type Params={
 }
 const InitialuserInformation : userInformation = {
     id:1,
-    mail:'',
+    email:'',
     password:'',
-    icon:'',
+    image:'',
     is_admin:false
 }
 interface userInformationList{
@@ -29,11 +29,15 @@ export default function Profile(props:any){
     const {id} = useParams<Params>();;
     const [formData,setFormData] = useState<userInformation>(InitialuserInformation);
     useEffect(()=>{
-        fetch('http://localhost:3001/todos',{method:'GET'})
+        console.log(id);
+        fetch('http://localhost:3001/users',{method:'GET'})
         .then(res=>res.json())
         .then(data=>{
             let information = data.map((todo:userInformation,index:number)=>
-                {if(todo.id == Number(id)){ setFormData(todo)}}
+                {
+                if(Number(todo.id) == Number(id)){ setFormData(todo)}
+                else {console.log(todo.id)}
+                }
         )
         })
         },
@@ -43,9 +47,9 @@ export default function Profile(props:any){
             <table>
                 <tbody>
                 <tr><td>ID</td><td>{formData.id}</td></tr>
-                <tr><td>メールアドレス</td><td>{formData.mail}</td></tr>
+                <tr><td>メールアドレス</td><td>{formData.email}</td></tr>
                 <tr><td>パスワード</td><td>{formData.password}</td></tr>
-                 <tr><td>アイコン</td><td><img src = {formData.icon}/></td></tr> 
+                 <tr><td>アイコン</td><td><img src = {formData.image}/></td></tr> 
                 <tr><td>利用者権限</td><td>{formData.is_admin}</td></tr>
                 </tbody>
             </table>
