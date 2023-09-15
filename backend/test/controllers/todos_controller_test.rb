@@ -12,7 +12,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create todo" do
     assert_difference("Todo.count") do
-      post todos_url, params: { todo: { c_date: @todo.c_date, done: @todo.done, due_date: @todo.due_date, memo: @todo.memo, org_filename: @todo.org_filename, owner: @todo.owner, public: @todo.public, real_filename: @todo.real_filename, todo: @todo.todo, url: @todo.url, url_text: @todo.url_text } }, as: :json
+      post todos_url, params: { todo: { c_date: @todo.c_date, done: @todo.done, due_date: @todo.due_date, memo: @todo.memo, org_filename: @todo.org_filename, user_id: @todo.user_id, public: @todo.public, real_filename: @todo.real_filename, todo: @todo.todo, url: @todo.url, url_text: @todo.url_text } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update todo" do
-    patch todo_url(@todo), params: { todo: { c_date: @todo.c_date, done: @todo.done, due_date: @todo.due_date, memo: @todo.memo, org_filename: @todo.org_filename, owner: @todo.owner, public: @todo.public, real_filename: @todo.real_filename, todo: @todo.todo, url: @todo.url, url_text: @todo.url_text } }, as: :json
+    patch todo_url(@todo), params: { todo: { c_date: @todo.c_date, done: @todo.done, due_date: @todo.due_date, memo: @todo.memo, org_filename: @todo.org_filename, user_id: @todo.user_id, public: @todo.public, real_filename: @todo.real_filename, todo: @todo.todo, url: @todo.url, url_text: @todo.url_text } }, as: :json
     assert_response :success
   end
 

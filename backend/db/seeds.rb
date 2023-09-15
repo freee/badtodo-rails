@@ -5,6 +5,17 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Todo.create(owner: 1, todo: 'Task 1', c_date: Date.today, due_date: Date.tomorrow, done: 0, memo: 'Memo 1')
-Todo.create(owner: 1, todo: 'Task 2', c_date: Date.today, due_date: Date.tomorrow, done: 0, memo: 'Memo 2')
-Todo.create(owner: 1, todo: 'Task 3', c_date: Date.today, due_date: Date.tomorrow, done: 0, memo: 'Memo 3')
+
+# usersテーブルのseedデータ
+user1 = User.new(email: 'test1@example.com', password: 'hugahuga')
+user1.save!
+user2 = User.new(email: 'test2@example.com', password: 'hugahuga')
+user2.save!
+user3 = User.new(email: 'test3@example.com', password: 'hugahuga')
+user3.save!
+
+# todosテーブルのseedデータ
+Todo.create!(todo: "Todo 1", c_date: Date.today, due_date: Date.today + 7, done: 0, memo: "Memo 1", org_filename: "file1.jpg", real_filename: "file1.jpg", url: "https://example.com", url_text: "Link 1", public: true, user_id: 1)
+Todo.create!(todo: "Todo 2", c_date: Date.today, due_date: Date.today + 7, done: 0, memo: "Memo 2", org_filename: "file2.jpg", real_filename: "file2.jpg", url: "https://example.com", url_text: "Link 2", public: false, user_id: 1)
+Todo.create!(todo: "Todo 3", c_date: Date.today, due_date: Date.today + 7, done: 1, memo: "Memo 3", org_filename: "file3.jpg", real_filename: "file3.jpg", url: "https://example.com", url_text: "Link 3", public: true, user_id: 2)
+
