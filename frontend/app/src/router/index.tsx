@@ -7,7 +7,8 @@ import Profile from '../views/Profile';
 import ToDoList from '../views/ToDoList';
 import UserListView from '../views/UserListView';
 import Login from '../views/Login';
-
+import WhatToDo from '../views/WhatToDo'
+import '../assets/Common.css';
 type UserInfo = {
 	isAdmin:boolean;
 	loggedIn:boolean;
@@ -17,11 +18,14 @@ type UserInfo = {
 
 const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,setLoggedIn,setIsAdmin}) => {
 	return (
+		<div>
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/register" element={<Register isAdmin={isAdmin}/>} />
 			<Route path="/contact" element={<Inquery />}/>
 			<Route path="/new-todo" element={<NewToDo />}/>
+			<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
+			<Route path={"/todo-list"} element={<ToDoList/>}/>
 			{!loggedIn && (
 				<Route path="/login" element={<Login setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin}/>}/>
 			)}
@@ -36,6 +40,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,setLoggedIn,setIsAdmin}) =>
 				
         	)}
 		</Routes>
+		</div>
 	);
 }
   

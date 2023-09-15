@@ -3,7 +3,11 @@
 html {
    overflow-y:scroll;
 }
-
+.Main{
+   background-color: #fff;
+   width:850px;
+   height:550px;
+}
 body {
    margin:0;
    padding:0;

@@ -4,6 +4,8 @@ import {useState,useEffect} from 'react';
 import '../assets/TextArea.css'
 import axios from 'axios';
 import e from "express";
+import {Link} from 'react-router-dom'
+import WhatToDo from "./WhatToDo"
 interface ToDoInformationList{
     todos:ToDoInformation[];
     todoTable:JSX.Element[];
@@ -36,7 +38,7 @@ export const ToDoList: React.FC = () => {
             <tr key={index}>
                 <td><input type="checkbox"/></td>
                 <td>{todo.id}</td>
-                <td>{todo.todo}</td>
+                <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
                 <td>{todo.register}</td>
                 <td>{todo.expire}</td>
                 <td>{todo.complete}</td>
@@ -60,11 +62,6 @@ export const ToDoList: React.FC = () => {
 			[name]:value,
 		});
 	};
-     
-// function ToDoList(props:any){
-    // const firstToDo :ToDoInformation    = { id:"admin",  todo:"パソコンを買う",register:"2023-09-12",expire:"2023-09-13",complete:false, attach:"",public:"OK"};
-    // const secondToDo :ToDoInformation   = { id:"normal", todo:"依頼の原稿を書く",register:"2023-09-12",expire:"2023-0919",complete:false,attach:"",public:"OK"};
-    // const todos :ToDoInformation[] = [firstToDo,secondToDo];
     return(
     <div>
         <form>
