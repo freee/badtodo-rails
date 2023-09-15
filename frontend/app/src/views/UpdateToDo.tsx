@@ -87,28 +87,28 @@ export default function UpdateToDo(){
         <table className="formTable">
             <tbody>
                 <tr>
-                <td>todo</td><td><input className = "Text" name="todo" placeholder={"todoを入力してください"} onChange={handleInputChange} value = {formData.todo}/></td>
+                <td>todo</td><td><input className = "Text" name="todo" placeholder={"todoを入力してください"} onChange={handleInputChange} defaultValue = {formData.todo}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="expire" type="date" value = {formData.due_date}/></td>
+                <td>期限</td><td><input name="expire" type="date" defaultValue = {formData.due_date}/></td>
                 </tr>
                 <tr>
-                <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" checked={formData.public} onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
+                <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" defaultChecked={formData.public} onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
                 </tr>
                 <tr>
-                <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} value = {formData.memo}/></td>
+                <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} defaultValue= {formData.memo}/></td>
                 </tr>
                 <tr>
                 <td>添付ファイル</td><td><input type="file" name="attachment"onChange={handleFileChange}/></td>
                 </tr>
                 <tr>
-                <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} value = {formData.url}/></td>
+                <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} defaultValue = {formData.url}/></td>
                 </tr>
                 <tr>
-                <td>URL（タイトル）</td><td><input className = "Text" type="text" name="url_text" id="input-linktext" placeholder="URLの表示文字列（任意）"onChange={handleInputChange} value = {formData.url_text}/></td>
+                <td>URL（タイトル）</td><td><input className = "Text" type="text" name="url_text" id="input-linktext" placeholder="URLの表示文字列（任意）"onChange={handleInputChange} defaultValue = {formData.url_text}/></td>
                 </tr>
                 <tr>
-                <td></td><td><input type="submit" value="登録"/></td>
+                <td></td><td><input type="submit" defaultValue="登録"/></td>
                 </tr>
             </tbody>
         </table>

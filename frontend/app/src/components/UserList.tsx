@@ -22,7 +22,7 @@ const UserList:React.FC<UserListProps> = ({users}) => {
         <td>{user.id}</td>
         <td>{user.password}</td>
         <td>{user.email}</td>
-        <img src = {user.icon}/>変更
+        <td><img src = {user.icon}/>変更</td>
         <td>{user.isAdmin ? "管理者" : "一般"}</td>
     </tr>
     );

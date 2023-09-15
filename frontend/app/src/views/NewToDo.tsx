@@ -68,6 +68,7 @@ export default function NewToDo(){
         <form className="Sub"onSubmit={handleTodoCreate}>
         todo新規登録
             <table className="formTable">
+                <tbody>
                 <tr>
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
                 </tr>
@@ -92,6 +93,7 @@ export default function NewToDo(){
                 <tr>
                 <td></td><td><input type="submit" value="登録"/></td>
                 </tr>
+                </tbody>
             </table>
         </form>
     </div>

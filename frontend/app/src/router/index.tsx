@@ -31,7 +31,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn}) => {
 			)}
 			{loggedIn && (
 				<>
-					<Route path="/mypage" element={<Profile />}/>
+					<Route path="/mypage/:id?" element={<Profile />}/>
 					{isAdmin && (
 						<Route path="/member-management" element={<UserListView />}/>
 					)}
