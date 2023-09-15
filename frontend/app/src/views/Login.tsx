@@ -1,20 +1,27 @@
 import UserField from "../components/UserField"
 import {useState} from "react"
+import api from "../api/axios";
+import { AxiosResponse } from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 interface FormState {
-	userID: string;
+	email: string;
 	password: string;
     isKeep: boolean;
 }
 
 const initialFormState: FormState = {
-	userID: "ユーザID",
-	password: "パスワ-ド",
+	email: "",
+	password: "",
     isKeep: false,
 };
 
-export const Login=()=>{
+
+
+export const Login:React.FC<any>=({setLoggedIn,setIsAdmin})=>{
     const [formData,setFormData] = useState<FormState>(initialFormState);
+    const navigate = useNavigate();
+
     const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
@@ -24,24 +31,46 @@ export const Login=()=>{
 			[name]:value,
 		});
 	};
+
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		
+		try{
+			const response: AxiosResponse<any> = await api.post('/auth/sign_in',{
+				"email": formData.email,
+                "password": formData.password
+			})
+            localStorage.setItem("token",response.headers["authorization"].slice(7));
+            setLoggedIn(true);
+            // Todo responseにフラグを立ててそれを読み取る
+            setIsAdmin(false);
+			navigate('/');
+		}catch (error){
+			console.error(error);
+		}
+	};
+
+
     return(
     <div className="loginContainer">
-        <table>
-            <tr><td>ログインしてください</td></tr>
-            <tr>
-                <td><UserField name={formData.userID} type="text" onChange={handleInputChange}/></td>
-            </tr>
-            <tr>
-                <td><UserField name={formData.password} type="text" onChange={handleInputChange}/></td>
-            </tr>
-            <tr>
-                <td><button type="button">ログイン</button></td>
-            </tr>
-            <tr><td><input type="checkbox" checked = {formData.isKeep} onChange={handleInputChange}/>ログインしたままにする</td></tr>
-            <tr><td> <a href ="http://www.yahoo.com">パスワードを忘れた場合</a>
-                </td></tr>
-            <tr><td>初めての方は<a href ="http://www.yahoo.com">こちら</a>から会員登録してください</td></tr>
-        </table>
+        <form onSubmit={handleLogin}>
+            <table>
+                <tr><td>ログインしてください</td></tr>
+                <tr>
+                    <td><input type="text" name="email" onChange={handleInputChange} /></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="password" onChange={handleInputChange} /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">ログイン</button></td>
+                </tr>
+                <tr><td><input type="checkbox" checked = {formData.isKeep} onChange={handleInputChange}/>ログインしたままにする</td></tr>
+                <tr><td> <a href ="http://www.yahoo.com">パスワードを忘れた場合</a>
+                    </td></tr>
+                <tr><td>初めての方は<Link to="/register">こちら</Link>から会員登録してください</td></tr>
+            </table>
+        </form>
     </div>
     );
 }
