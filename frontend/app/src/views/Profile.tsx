@@ -5,6 +5,7 @@ import {useState} from "react"
 import api from '../api/axios'
 import { userInfo } from "os";
 import {useParams} from 'react-router'
+import '../assets/TextArea.css'
 interface userInformation{
     id:number,
     email:string,
@@ -44,7 +45,8 @@ export default function Profile(props:any){
     []);
     return(
         <div>
-            <table>
+            <form>
+            <table id="data-table">
                 <tbody>
                 <tr><td>ID</td><td>{formData.id}</td></tr>
                 <tr><td>メールアドレス</td><td>{formData.email}</td></tr>
@@ -53,6 +55,7 @@ export default function Profile(props:any){
                 <tr><td>利用者権限</td><td>{formData.is_admin}</td></tr>
                 </tbody>
             </table>
+            </form>
         </div>
     );
 }

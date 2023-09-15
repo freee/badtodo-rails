@@ -26,7 +26,8 @@ export const Inquery=()=>{
 		});
 	};
     return (
-   <form className="Sub">
+   <div className="Sub">
+    <form>
     <table>
         <tbody>
             <tr>
@@ -46,7 +47,8 @@ export const Inquery=()=>{
             </tr>
         </tbody>
     </table>
-   </form> 
+    </form>
+   </div> 
    );
 }
 

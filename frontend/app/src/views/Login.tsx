@@ -26,6 +26,7 @@ export const Login=()=>{
 	};
     return(
     <div className="loginContainer">
+        <form>
         <table>
             <tr><td>ログインしてください</td></tr>
             <tr>
@@ -42,6 +43,7 @@ export const Login=()=>{
                 </td></tr>
             <tr><td>初めての方は<a href ="http://www.yahoo.com">こちら</a>から会員登録してください</td></tr>
         </table>
+        </form>
     </div>
     );
 }
