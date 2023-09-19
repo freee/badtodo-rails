@@ -14,20 +14,20 @@ interface ToDoInformationList{
 interface ToDoInformation{
     id:string;
     todo:string;
-    register:string;
-    expire:string;
-    complete:string;
+    c_date:string;
+    due_date:string;
+    done:string;
     attach:string;
-    public:string
+    public:boolean
 }
 const initialToDoInformation: ToDoInformation={
     id:'',
     todo:'',
-    register:'',
-    expire:'',
-    complete:'',
+    c_date:'',
+    due_date:'',
+    done:'',
     attach:'',
-    public:''
+    public:false
 }
 export const ToDoList: React.FC = () => {
 	const [formData, setFormData] = useState<ToDoInformationList>({todos:[],todoTable:[]});
@@ -40,11 +40,11 @@ export const ToDoList: React.FC = () => {
                 <td><input type="checkbox"/></td>
                 <td>{todo.id}</td>
                 <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
-                <td>{todo.register}</td>
-                <td>{todo.expire}</td>
-                <td>{todo.complete}</td>
+                <td>{todo.c_date}</td>
+                <td>{todo.due_date}</td>
+                <td>{todo.done?"完了":""}</td>
                 <td>{todo.attach}</td>
-                <td>{todo.public}</td>
+                <td>{todo.public?"OK":""}</td>
             </tr>
         )
         setFormData({

@@ -27,27 +27,27 @@ export const Inquery=()=>{
 	};
     return (
    <div className="Sub">
-    <form>
-    <table>
-        <tbody>
-            <tr>
-            <td>件名</td><td><input name="subject" placeholder={formData.title} onChange={handleInputChange}/></td>
-            </tr>
-            <tr>
-            <td>Eメール</td><td><input name="email" placeholder={formData.email} onChange={handleInputChange}/></td>
-            </tr>
-            <tr>
-            <td>氏名</td><td><input name="name" placeholder={formData.name} onChange={handleInputChange}/></td>
-            </tr>
-            <tr>
-            <td>質問内容</td><td><textarea className = "TextArea" name="question" placeholder={formData.question} onChange={handleInputChange}></textarea></td>
-            </tr>
-            <tr>
-            <td></td><td><input type="submit" value="送信"/></td>
-            </tr>
-        </tbody>
-    </table>
-    </form>
+        <form>
+            <table className="formTable">
+                <tbody>
+                    <tr>
+                    <td>件名</td><td><input name="subject" placeholder={formData.title} onChange={handleInputChange}/></td>
+                    </tr>
+                    <tr>
+                    <td>Eメール</td><td><input name="email" placeholder={formData.email} onChange={handleInputChange}/></td>
+                    </tr>
+                    <tr>
+                    <td>氏名</td><td><input name="name" placeholder={formData.name} onChange={handleInputChange}/></td>
+                    </tr>
+                    <tr>
+                    <td>質問内容</td><td><textarea className = "TextArea" name="question" placeholder={formData.question} onChange={handleInputChange}></textarea></td>
+                    </tr>
+                    <tr>
+                    <td></td><td><input type="submit" value="送信"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
    </div> 
    );
 }

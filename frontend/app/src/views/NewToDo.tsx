@@ -64,8 +64,8 @@ export default function NewToDo(){
 	};
 
     return (
-    <div>
-        <form className="Sub"onSubmit={handleTodoCreate}>
+    <div className="Sub">
+        <form onSubmit={handleTodoCreate}>
         todo新規登録
             <table className="formTable">
                 <tbody>
