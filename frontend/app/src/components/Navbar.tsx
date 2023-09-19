@@ -14,7 +14,7 @@ type NavbarProps = {
     <nav>
       <ul  className='topnav'>
         <li>
-          <Link to="/">一覧</Link>
+          <Link to="/todo-list">一覧</Link>
         </li>
 		<li>
 			<Link to="/new-todo">新規追加</Link>
