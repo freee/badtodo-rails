@@ -75,7 +75,7 @@ export default function NewToDo(props:any){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="expire" type="date"/>{formData.due}</td>
+                <td>期限</td><td><input name="expire" type="date" onChange={handleInputChange}/>{formData.due}</td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" checked={formData.public}onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
