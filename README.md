@@ -30,9 +30,9 @@ docker compose exec api rails db:seed
 ##  システム構成
 このアプリケーションは、以下の構成で動作します。
 
-frontend: localhost:3000で動作するReactアプリケーション 
-api:      localhost:3001で動作するrailsアプリケーション(APIモードで動作します)
-db:       localhost:3307で動作するmysqlデータベース
+frontend: localhost:3000で動作するReactアプリケーション  
+api:      localhost:3001で動作するrailsアプリケーション(APIモードで動作します)  
+db:       localhost:3307で動作するmysqlデータベース  
 
 ##  機能説明
 ### frontend
