@@ -38,7 +38,7 @@ const initialToDoformData: ToDoformData={
     public:false,
     user_id:1
 }
-export default function UpdateToDo(){
+export default function UpdateToDo(props:any){
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
     const navigate = useNavigate();
@@ -53,6 +53,7 @@ export default function UpdateToDo(){
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
+        console.log(event.type);
 		const { name, value } = event.target;
 		setFormData({
 			...formData,
@@ -73,8 +74,6 @@ export default function UpdateToDo(){
 			const response: AxiosResponse<any> = await api.put('/todos/'+formData.id,{
 				"todo": formData
 			});
-
-			console.log(response.data);
 			navigate('/');
 		}catch (error){
 			console.error(error);
@@ -82,7 +81,7 @@ export default function UpdateToDo(){
 	};
 
     return (
-    <form className="Sub" onSubmit = {handleTodoCreate}>
+    <form onSubmit = {handleTodoCreate}>
         ToDo編集
         <table className="formTable">
             <tbody>
@@ -90,7 +89,7 @@ export default function UpdateToDo(){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={"todoを入力してください"} onChange={handleInputChange} defaultValue = {formData.todo}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="expire" type="date" defaultValue = {formData.due_date} onChange={handleInputChange}/></td>
+                <td>期限</td><td><input name="due_date" type="date" defaultValue = {formData.due_date} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" defaultChecked={formData.public} onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
@@ -99,7 +98,7 @@ export default function UpdateToDo(){
                 <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} defaultValue= {formData.memo}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attachment"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach"onChange={handleFileChange}/></td>
                 </tr>
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} defaultValue = {formData.url}/></td>

@@ -29,7 +29,7 @@ const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,userId,setLoggedIn,setIsAdm
 				<Route path="/contact" element={<Inquery />}/>
 				<Route path="/new-todo" element={<NewToDo userId={userId}/>}/>
 				<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
-				<Route path={"/update-todo/:id?"} element={<UpdateToDo />}/>
+				<Route path={"/update-todo/:id?"} element={<UpdateToDo userId={userId}/>}/>
 				{!loggedIn && (
 					<Route path="/login" element={<Login setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin} setUserId={setUserId}/>}/>
 				)}
