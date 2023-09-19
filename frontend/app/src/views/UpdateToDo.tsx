@@ -42,14 +42,14 @@ export default function UpdateToDo(){
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
     const navigate = useNavigate();
-    // useEffect(()=>{
-    //     async function fetchData(){
-    //         const response: AxiosResponse<any> = await api.get('/todos/'+id);
-    //         setFormData(response.data);console.log(response.data);
-    //         return response;
-    //     }
-    // fetchData();
-    // },[]);
+    useEffect(()=>{
+        async function fetchData(){
+            const response: AxiosResponse<any> = await api.get('/todos/'+id);
+            setFormData(response.data);console.log(response.data);
+            return response;
+        }
+    fetchData();
+    },[]);
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
@@ -70,7 +70,7 @@ export default function UpdateToDo(){
 		event.preventDefault();
 		
 		try{
-			const response: AxiosResponse<any> = await api.post('/todos',{
+			const response: AxiosResponse<any> = await api.put('/todos/'+formData.id,{
 				"todo": formData
 			});
 
