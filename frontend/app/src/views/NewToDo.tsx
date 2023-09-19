@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import api from '../api/axios';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router';
+import currentDate from '../utils/currentDate';
 
 interface FormState {
 	todo: string;
@@ -12,6 +13,7 @@ interface FormState {
 	attach: File | null;
 	url: string;
     url_title:string;
+    c_date:string;
 }
 
 type RegisterProps = {
@@ -25,7 +27,8 @@ const initialFormState: FormState = {
 	memo: '',
 	attach: null,
     url:"補足URL（任意）",
-    url_title:"URLの表示文字列（任意）"
+    url_title:"URLの表示文字列（任意）",
+    c_date:currentDate(),
 };
 export default function NewToDo(props:any){
     const [formData, setFormData] = useState<FormState>(initialFormState);
@@ -74,7 +77,7 @@ export default function NewToDo(props:any){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="expire" type="date"/>{formData.due_date}</td>
+                <td>期限</td><td><input name="due_date" type="date" onChange={handleInputChange}/>{formData.due_date}</td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" checked={formData.public}onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
