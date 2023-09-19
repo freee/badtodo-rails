@@ -53,7 +53,7 @@ export const ToDoList: React.FC = () => {
             todos: data
         })
         })
-    });
+    },[]);
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
