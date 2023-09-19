@@ -64,7 +64,6 @@ export const ToDoList: React.FC = () => {
 		});
 	};
     return(
-    <div>
         <form>
             <div className="search"><input type="text"/><button>検索</button>あいまい検索<input type="checkbox"/></div>
             <table id="data-table">
@@ -75,8 +74,6 @@ export const ToDoList: React.FC = () => {
                     <button type="submit" name="process" value="donelist">完了</button>
                     <button type="submit" name="process" value="exportlist">エクスポート</button>
         </form>
-        <br/>
-    </div>
     );
 }
 

@@ -82,7 +82,7 @@ export default function UpdateToDo(){
 	};
 
     return (
-    <form className="Sub" onSubmit = {handleTodoCreate}>
+    <form onSubmit = {handleTodoCreate}>
         ToDo編集
         <table className="formTable">
             <tbody>
@@ -99,7 +99,7 @@ export default function UpdateToDo(){
                 <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} defaultValue= {formData.memo}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attachment"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach"onChange={handleFileChange}/></td>
                 </tr>
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} defaultValue = {formData.url}/></td>
