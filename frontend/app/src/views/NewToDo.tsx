@@ -12,6 +12,7 @@ interface FormState {
 	attach: File | null;
 	url: string;
     url_title:string;
+    user_id:number;
 }
 
 type RegisterProps = {
@@ -25,7 +26,8 @@ const initialFormState: FormState = {
 	memo: '',
 	attach: null,
     url:"補足URL（任意）",
-    url_title:"URLの表示文字列（任意）"
+    url_title:"URLの表示文字列（任意）",
+    user_id:1
 };
 export default function NewToDo(){
     const [formData, setFormData] = useState<FormState>(initialFormState);
