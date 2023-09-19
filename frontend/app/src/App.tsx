@@ -4,10 +4,12 @@ import './App.css';
 import Router from './router/index';
 import {Navbar} from './components/Navbar';
 import api from './api/axios';
+import { resolveTripleslashReference } from 'typescript';
 
 function App() {
   const [loggedIn,setLoggedIn] = useState(false);
   const [isAdmin,setIsAdmin] = useState(false);
+  const [userId,setUserId] = useState(0);
   useEffect(()=>{
     (async()=>{
       try {
@@ -24,6 +26,8 @@ function App() {
               }
           });
           if(response.data.success){
+            setUserId(response.data.data.id);
+            setIsAdmin(response.data.data["is_admin"]);
             setLoggedIn(true);
           };
         }
@@ -37,8 +41,8 @@ function App() {
   return (
     <div>
       <h1>Worst Todo</h1>
-      <Navbar loggedIn={loggedIn} isAdmin={isAdmin}/>
-      <Router loggedIn={loggedIn} isAdmin={isAdmin} setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin}/>
+      <Navbar loggedIn={loggedIn} isAdmin={isAdmin} />
+      <Router loggedIn={loggedIn} isAdmin={isAdmin} userId={userId} setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin} setUserId={{setUserId}}/>
     </div>
   );
 }
