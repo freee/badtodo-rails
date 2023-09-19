@@ -66,7 +66,6 @@ export default function NewToDo(){
 	};
 
     return (
-    <div className="Sub">
         <form onSubmit={handleTodoCreate}>
         todo新規登録
             <table className="formTable">
@@ -98,6 +97,5 @@ export default function NewToDo(){
                 </tbody>
             </table>
         </form>
-    </div>
     );
 }

@@ -27,15 +27,13 @@ const UserList:React.FC<UserListProps> = (users) => {
     </tr>
     );
     return(
-    <div>
         <form>
-        <table id="data-table">
-            <thead><tr><th>ID</th><th>パスワード</th><th>メールアドレス</th><th>アイコン</th><th>種別</th></tr></thead>
-        <tbody>{information}</tbody>
-        </table><br/>
-        <Link to ='/new-todo'>新規追加</Link><br/>
+            <table id="data-table">
+                <thead><tr><th>ID</th><th>パスワード</th><th>メールアドレス</th><th>アイコン</th><th>種別</th></tr></thead>
+            <tbody>{information}</tbody>
+            </table><br/>
+            <Link to ='/new-todo'>新規追加</Link><br/>
         </form>
-    </div>
     );
 }
 export default UserList;

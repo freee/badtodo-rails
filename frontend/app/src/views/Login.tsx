@@ -52,7 +52,7 @@ export const Login:React.FC<any>=({setLoggedIn,setIsAdmin})=>{
 
 
     return(
-    <div className="loginContainer">
+    <div className="Sub">
         <form onSubmit={handleLogin}>
             <table>
                 <tr><td>ログインしてください</td></tr>

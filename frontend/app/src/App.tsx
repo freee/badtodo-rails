@@ -35,10 +35,11 @@ function App() {
   
 
   return (
-    <div>
+    <div className="Sub">
       <h1>Worst Todo</h1>
       <Navbar loggedIn={loggedIn} isAdmin={isAdmin}/>
       <Router loggedIn={loggedIn} isAdmin={isAdmin} setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin}/>
+      <br/>
     </div>
   );
 }

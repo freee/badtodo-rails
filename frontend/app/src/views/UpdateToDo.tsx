@@ -82,7 +82,7 @@ export default function UpdateToDo(){
 	};
 
     return (
-    <form className="Sub" onSubmit = {handleTodoCreate}>
+    <form onSubmit = {handleTodoCreate}>
         ToDo編集
         <table className="formTable">
             <tbody>
