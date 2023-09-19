@@ -12,9 +12,9 @@ interface ToDoformData{
     id:string;
     todo:string;
     icon:string;
-    register:string;
-    expire:string;
-    complete:string;
+    c_date:string;
+    due_date:string;
+    done:string;
     memo:string;
     attach:string;
     url:string;
@@ -27,9 +27,9 @@ const initialToDoformData: ToDoformData={
     id:'',
     todo:'',
     icon:'',
-    register:'',
-    expire:'',
-    complete:'',
+    c_date:'',
+    due_date:'',
+    done:'',
     memo:'',
     attach:'',
     url:'',
@@ -56,9 +56,9 @@ export const WhatToDo: React.FC = () => {
             <table><tbody>
                 <tr><td>ID</td><td>{id}<img src={formData.icon}/></td></tr>
                 <tr><td>todo</td><td>{formData.todo}</td></tr>
-                <tr><td>登録日</td><td>{formData.register}</td></tr>
-                <tr><td>期限</td><td>{formData.expire}</td></tr>
-                <tr><td>完了</td><td>{formData.complete}</td></tr>
+                <tr><td>登録日</td><td>{formData.c_date}</td></tr>
+                <tr><td>期限</td><td>{formData.due_date}</td></tr>
+                <tr><td>完了</td><td>{formData.done}</td></tr>
                 <tr><td>メモ</td><td>{formData.memo}</td></tr>
                 <tr><td>添付ファイル</td><td>{formData.attach}</td></tr>
                 <tr><td>URL</td><td>{formData.url}</td></tr>

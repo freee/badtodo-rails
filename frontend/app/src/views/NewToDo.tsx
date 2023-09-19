@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 
 interface FormState {
 	todo: string;
-    due:string;
+    due_date:string;
 	public: boolean;
 	memo: string;
 	attach: File | null;
@@ -21,7 +21,7 @@ type RegisterProps = {
 
 const initialFormState: FormState = {
 	todo: "todoを入力してください（必須）",
-    due:'',
+    due_date:'',
 	public: false,
 	memo: '',
 	attach: null,
@@ -74,7 +74,7 @@ export default function NewToDo(){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="expire" type="date"/>{formData.due}</td>
+                <td>期限</td><td><input name="expire" type="date"/>{formData.due_date}</td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" checked={formData.public}onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
