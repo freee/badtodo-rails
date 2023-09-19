@@ -18,7 +18,7 @@ const initialFormState: FormState = {
 
 
 
-export const Login:React.FC<any>=({setLoggedIn,setIsAdmin})=>{
+export const Login:React.FC<any>=({setLoggedIn,setIsAdmin,setUserId})=>{
     const [formData,setFormData] = useState<FormState>(initialFormState);
     const navigate = useNavigate();
 
@@ -42,8 +42,8 @@ export const Login:React.FC<any>=({setLoggedIn,setIsAdmin})=>{
 			})
             localStorage.setItem("token",response.headers["authorization"].slice(7));
             setLoggedIn(true);
-            // Todo responseにフラグを立ててそれを読み取る
-            setIsAdmin(false);
+            setIsAdmin(response.data.data["is_admin"]);
+            setUserId(response.data.data.id);
 			navigate('/');
 		}catch (error){
 			console.error(error);

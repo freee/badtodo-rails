@@ -12,7 +12,6 @@ interface FormState {
 	attach: File | null;
 	url: string;
     url_title:string;
-    user_id:number;
 }
 
 type RegisterProps = {
@@ -26,11 +25,11 @@ const initialFormState: FormState = {
 	memo: '',
 	attach: null,
     url:"補足URL（任意）",
-    url_title:"URLの表示文字列（任意）",
-    user_id:1
+    url_title:"URLの表示文字列（任意）"
 };
-export default function NewToDo(){
+export default function NewToDo(props:any){
     const [formData, setFormData] = useState<FormState>(initialFormState);
+
     const navigate = useNavigate();
 
 	const handleInputChange = (
@@ -54,6 +53,7 @@ export default function NewToDo(){
 		event.preventDefault();
 		
 		try{
+            Object.assign(formData,{user_id:props.userId})
 			const response: AxiosResponse<any> = await api.post('/todos',{
 				"todo": formData
 			});
