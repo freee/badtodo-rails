@@ -43,6 +43,7 @@ function App() {
       <h1>Worst Todo</h1>
       <Navbar loggedIn={loggedIn} isAdmin={isAdmin} />
       <Router loggedIn={loggedIn} isAdmin={isAdmin} userId={userId} setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin} setUserId={{setUserId}}/>
+      <br/>
     </div>
   );
 }
