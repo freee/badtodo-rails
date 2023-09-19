@@ -69,7 +69,7 @@ export default function UpdateToDo(props:any){
 	};
     const handleTodoCreate = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		
+		console.log(formData)
 		try{
 			const response: AxiosResponse<any> = await api.put('/todos/'+formData.id,{
 				"todo": formData
