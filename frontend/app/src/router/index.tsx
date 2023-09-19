@@ -14,26 +14,28 @@ import '../assets/Common.css';
 type UserInfo = {
 	isAdmin:boolean;
 	loggedIn:boolean;
+	userId:number;
 	setLoggedIn:any;
 	setIsAdmin:any;
+	setUserId:any;
 }
 
-const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,setLoggedIn,setIsAdmin}) => {
+const Router:React.FC<UserInfo> = ({isAdmin,loggedIn,userId,setLoggedIn,setIsAdmin,setUserId}) => {
 	return (
 		<div>
 			<Routes>
 				<Route path="/" element={<ToDoList />} />
 				<Route path="/register" element={<Register isAdmin={isAdmin}/>} />
 				<Route path="/contact" element={<Inquery />}/>
-				<Route path="/new-todo" element={<NewToDo />}/>
+				<Route path="/new-todo" element={<NewToDo userId={userId}/>}/>
 				<Route path={"/what-todo/:id?"} element={<WhatToDo />}/>
 				<Route path={"/update-todo/:id?"} element={<UpdateToDo />}/>
 				{!loggedIn && (
-					<Route path="/login" element={<Login setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin}/>}/>
+					<Route path="/login" element={<Login setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin} setUserId={setUserId}/>}/>
 				)}
 				{loggedIn && (
 					<>
-						<Route path="/mypage/:id?" element={<Profile />}/>
+						<Route path="/mypage/:id?" element={<Profile userId={userId}/>}/>
 						{isAdmin && (
 							<Route path="/member-management" element={<UserListView />}/>
 						)}

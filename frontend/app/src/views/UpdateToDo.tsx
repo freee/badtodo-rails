@@ -90,7 +90,7 @@ export default function UpdateToDo(){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={"todoを入力してください"} onChange={handleInputChange} defaultValue = {formData.todo}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="due_date" type="date" defaultValue = {formData.due_date}/></td>
+                <td>期限</td><td><input name="expire" type="date" defaultValue = {formData.due_date} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" defaultChecked={formData.public} onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
