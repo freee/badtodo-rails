@@ -17,7 +17,7 @@ interface ToDoInformation{
     c_date:string;
     due_date:string;
     done:string;
-    attach:string;
+    attach_url:string;
     public:boolean
 }
 const initialToDoInformation: ToDoInformation={
@@ -26,11 +26,12 @@ const initialToDoInformation: ToDoInformation={
     c_date:'',
     due_date:'',
     done:'',
-    attach:'',
+    attach_url:'',
     public:false
 }
 export const ToDoList: React.FC = () => {
 	const [formData, setFormData] = useState<ToDoInformationList>({todos:[],todoTable:[]});
+
     useEffect(()=> {
         fetch('http://localhost:3001/todos',{method:'GET'})
         .then(res=>res.json())
@@ -43,7 +44,7 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.c_date}</td>
                 <td>{todo.due_date}</td>
                 <td>{todo.done?"完了":""}</td>
-                <td>{todo.attach}</td>
+                <td>{todo.attach_url && (<a href={todo.attach_url}>{todo.attach_url.match(/([^/]+?)?$/)?.[0].slice(0,25)}</a>)}</td>
                 <td>{todo.public?"OK":""}</td>
             </tr>
         )

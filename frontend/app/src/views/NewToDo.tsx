@@ -1,6 +1,6 @@
 import '../assets/TextArea.css'
 import React, { useState } from 'react';
-import api from '../api/axios';
+import { imagesApi } from '../api/axios';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router';
 import currentDate from '../utils/currentDate';
@@ -16,9 +16,6 @@ interface FormState {
     c_date:string;
 }
 
-type RegisterProps = {
-	isAdmin: boolean
-}
 
 const initialFormState: FormState = {
 	todo: "todoを入力してください（必須）",
@@ -44,6 +41,7 @@ export default function NewToDo(props:any){
 			[name]:value,
 		});
 	};
+    
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
 		const file = event.target.files && event.target.files[0];
 		setFormData({
@@ -57,7 +55,7 @@ export default function NewToDo(props:any){
 		
 		try{
             Object.assign(formData,{user_id:props.userId})
-			const response: AxiosResponse<any> = await api.post('/todos',{
+			const response: AxiosResponse<any> = await imagesApi.post('/todos',{
 				"todo": formData
 			});
 
@@ -67,6 +65,9 @@ export default function NewToDo(props:any){
 			console.error(error);
 		}
 	};
+
+    const imagePreview = formData.attach ? <tr><td>プレビュー</td><td><img src={URL.createObjectURL(formData.attach)} className="imagePreview"alt="" /></td></tr>: <></>;
+
 
     return (
         <form onSubmit={handleTodoCreate}>
@@ -86,8 +87,9 @@ export default function NewToDo(props:any){
                 <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={formData.memo} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attachment"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach_url" onChange={handleFileChange}/></td>
                 </tr>
+                {imagePreview}
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={formData.url} id="input-url"onChange={handleInputChange}/></td>
                 </tr>

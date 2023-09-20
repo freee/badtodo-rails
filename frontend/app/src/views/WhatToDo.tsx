@@ -38,11 +38,15 @@ const initialToDoformData: ToDoformData={
 export const WhatToDo: React.FC = () => {
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
+    const [imageUrl,setImageUrl] = useState<string>('');
     const navigate = useNavigate();
     useEffect(()=>{
         async function fetchData(){
             const response: AxiosResponse<any> = await api.get('/todos/'+id);
             setFormData(response.data);console.log(response.data);
+            if(response.data.attach_url !== null){
+                setImageUrl(response.data.attach_url);
+            }
             return response;
         }
     fetchData();
@@ -60,7 +64,7 @@ export const WhatToDo: React.FC = () => {
                 <tr><td>期限</td><td>{formData.due_date}</td></tr>
                 <tr><td>完了</td><td>{formData.done}</td></tr>
                 <tr><td>メモ</td><td>{formData.memo}</td></tr>
-                <tr><td>添付ファイル</td><td>{formData.attach}</td></tr>
+                <tr><td>添付ファイル</td><td><a href={imageUrl}>{imageUrl.match(/([^/]+?)?$/)?.[0].slice(0,25)}</a></td></tr>
                 <tr><td>URL</td><td>{formData.url}</td></tr>
                 <tr><td>公開</td><td>{formData.public}</td></tr>
                 </tbody>
