@@ -8,6 +8,7 @@ import ToDoList from "./ToDoList";
 import {useParams} from 'react-router'
 import api from '../api/axios'
 import {useNavigate} from 'react-router'
+import '../assets/ImagePreview.css'
 
 interface ToDoformData{
     id:number;
@@ -61,6 +62,7 @@ export default function UpdateToDo(){
 	};
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
 		const file = event.target.files && event.target.files[0];
+        console.log(file);
 		setFormData({
 			...formData,
 			attach:file || null,
@@ -81,6 +83,8 @@ export default function UpdateToDo(){
 		}
 	};
 
+    const imagePreview = formData.attach ? <tr><td>プレビュー</td><td><img src={URL.createObjectURL(formData.attach)} className="imagePreview"alt="" /></td></tr>: <></>;
+
     return (
     <form onSubmit = {handleTodoCreate}>
         ToDo編集
@@ -99,8 +103,9 @@ export default function UpdateToDo(){
                 <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} defaultValue= {formData.memo}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attach"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach_url"onChange={handleFileChange}/></td>
                 </tr>
+                {imagePreview}
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} defaultValue = {formData.url}/></td>
                 </tr>

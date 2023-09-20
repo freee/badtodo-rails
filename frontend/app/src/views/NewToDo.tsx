@@ -66,6 +66,9 @@ export default function NewToDo(props:any){
 		}
 	};
 
+    const imagePreview = formData.attach ? <tr><td>プレビュー</td><td><img src={URL.createObjectURL(formData.attach)} className="imagePreview"alt="" /></td></tr>: <></>;
+
+
     return (
         <form onSubmit={handleTodoCreate}>
         todo新規登録
@@ -86,6 +89,7 @@ export default function NewToDo(props:any){
                 <tr>
                 <td>添付ファイル</td><td><input type="file" name="attach_url" onChange={handleFileChange}/></td>
                 </tr>
+                {imagePreview}
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={formData.url} id="input-url"onChange={handleInputChange}/></td>
                 </tr>
