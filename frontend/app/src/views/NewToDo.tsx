@@ -1,10 +1,9 @@
 import '../assets/TextArea.css'
 import React, { useState } from 'react';
-import api from '../api/axios';
+import { imagesApi } from '../api/axios';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router';
 import currentDate from '../utils/currentDate';
-
 interface FormState {
 	todo: string;
     due_date:string;
@@ -16,9 +15,6 @@ interface FormState {
     c_date:string;
 }
 
-type RegisterProps = {
-	isAdmin: boolean
-}
 
 const initialFormState: FormState = {
 	todo: "todoを入力してください（必須）",
@@ -44,6 +40,17 @@ export default function NewToDo(props:any){
 			[name]:value,
 		});
 	};
+    const handleMemoChange = (
+		event: React.ChangeEvent<HTMLTextAreaElement>
+	) => {
+		const { name, value } = event.target;
+        
+		setFormData({
+			...formData,
+			[name]:value,
+		}
+        );
+	};
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
 		const file = event.target.files && event.target.files[0];
 		setFormData({
@@ -57,7 +64,7 @@ export default function NewToDo(props:any){
 		
 		try{
             Object.assign(formData,{user_id:props.userId})
-			const response: AxiosResponse<any> = await api.post('/todos',{
+			const response: AxiosResponse<any> = await imagesApi.post('/todos',{
 				"todo": formData
 			});
 
@@ -68,6 +75,9 @@ export default function NewToDo(props:any){
 		}
 	};
 
+    const imagePreview = formData.attach ? <tr><td>プレビュー</td><td><img src={URL.createObjectURL(formData.attach)} className="imagePreview"alt="" /></td></tr>: <></>;
+
+
     return (
         <form onSubmit={handleTodoCreate}>
         todo新規登録
@@ -77,17 +87,18 @@ export default function NewToDo(props:any){
                 <td>todo</td><td><input className = "Text" name="todo" placeholder={formData.todo} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
-                <td>期限</td><td><input name="due_date" type="date" onChange={handleInputChange}/>{formData.due_date}</td>
+                <td>期限</td><td><input name="due_date" type="date" onChange={handleInputChange} defaultValue = {formData.due_date}/></td>
                 </tr>
                 <tr>
                 <td><label>公開</label></td><td><input name="public" id="public" type="checkbox" checked={formData.public}onChange={(e) => setFormData({...formData, public: e.target.checked })}/></td>
                 </tr>
                 <tr>
-                <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={formData.memo} onChange={handleInputChange}/></td>
+                <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={formData.memo} onChange={handleMemoChange}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attachment"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach_url" onChange={handleFileChange}/></td>
                 </tr>
+                {imagePreview}
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={formData.url} id="input-url"onChange={handleInputChange}/></td>
                 </tr>

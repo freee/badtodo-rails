@@ -13,12 +13,12 @@ class TodosController < ApplicationController
       @todos = Todo.where("public=true AND todo = '#{params[:todo]}'") 
     end
 
-    render json: @todos
+    render json: @todos, methods: [:attach_url]
   end
 
   # GET /todos/1
   def show
-    render json: @todo
+    render json: @todo, methods: [:attach_url]
   end
 
   # POST /todos
@@ -26,7 +26,7 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
-      render json: @todo, status: :created, location: @todo
+      render json: @todo, status: :created, location: @todo , methods: [:attach_url]
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   def update
     if @todo.update(todo_params)
-      render json: @todo
+      render json: @todo , methods: [:attach_url]
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -52,9 +52,8 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def todo_params
-    params.require(:todo).permit(:user_id, :todo, :c_date, :due_date, :done, :memo, :org_filename, :real_filename, :url, :url_text, :public)
-  end
-  
+    # Only allow a list of trusted parameters through.
+    def todo_params
+      params.require(:todo).permit(:user_id, :todo, :c_date, :due_date, :done, :memo, :org_filename, :real_filename, :url, :url_text, :public, :attach)
+    end
 end

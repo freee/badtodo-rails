@@ -18,7 +18,7 @@ interface ToDoInformation{
     c_date:string;
     due_date:string;
     done:string;
-    attach:string;
+    attach_url:string;
     public:boolean
 }
 const initialToDoInformation: ToDoInformation={
@@ -27,7 +27,7 @@ const initialToDoInformation: ToDoInformation={
     c_date:'',
     due_date:'',
     done:'',
-    attach:'',
+    attach_url:'',
     public:false
 }
 
@@ -69,7 +69,7 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.c_date}</td>
                 <td>{todo.due_date}</td>
                 <td>{todo.done?"完了":""}</td>
-                <td>{todo.attach}</td>
+                <td>{todo.attach_url && (<a href={todo.attach_url}>{todo.attach_url.match(/([^/]+?)?$/)?.[0].slice(0,25)}</a>)}</td>
                 <td>{todo.public?"OK":""}</td>
             </tr>  
         )
@@ -105,7 +105,7 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.c_date}</td>
                 <td>{todo.due_date}</td>
                 <td>{todo.done?"完了":""}</td>
-                <td>{todo.attach}</td>
+                <td>{todo.attach_url && (<a href={todo.attach_url}>{todo.attach_url.match(/([^/]+?)?$/)?.[0].slice(0,25)}</a>)}</td>
                 <td>{todo.public?"OK":""}</td>
             </tr>
         )
@@ -117,7 +117,7 @@ export const ToDoList: React.FC = () => {
     }
 
     return(
-        <form>
+        <form className="Sub">
             <div className="search">
                 <input name="todo" type="text" onChange={handleQueryChange}/>
                 <button onClick={handleQuerySubmit}>検索</button>

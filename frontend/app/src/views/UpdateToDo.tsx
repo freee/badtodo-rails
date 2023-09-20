@@ -6,8 +6,9 @@ import {AxiosResponse} from 'axios'
 import e from "express";
 import ToDoList from "./ToDoList";
 import {useParams} from 'react-router'
-import api from '../api/axios'
+import api ,{ imagesApi } from '../api/axios'
 import {useNavigate} from 'react-router'
+import '../assets/ImagePreview.css'
 
 interface ToDoformData{
     id:number;
@@ -38,14 +39,18 @@ const initialToDoformData: ToDoformData={
     public:false,
     user_id:1
 }
-export default function UpdateToDo(){
+export default function UpdateToDo(props:any){
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
+    const [imageUrl,setImageUrl] = useState<string>('');
     const navigate = useNavigate();
     useEffect(()=>{
         async function fetchData(){
             const response: AxiosResponse<any> = await api.get('/todos/'+id);
-            setFormData(response.data);console.log(response.data);
+            setFormData(response.data);
+            if(response.data.attach_url !== null){
+                setImageUrl(response.data.attach_url);
+            }
             return response;
         }
     fetchData();
@@ -53,6 +58,7 @@ export default function UpdateToDo(){
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
+        console.log(event.type);
 		const { name, value } = event.target;
 		setFormData({
 			...formData,
@@ -60,7 +66,9 @@ export default function UpdateToDo(){
 		});
 	};
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        setImageUrl('');
 		const file = event.target.files && event.target.files[0];
+        console.log(imageUrl)
 		setFormData({
 			...formData,
 			attach:file || null,
@@ -70,16 +78,16 @@ export default function UpdateToDo(){
 		event.preventDefault();
 		console.log(formData)
 		try{
-			const response: AxiosResponse<any> = await api.put('/todos/'+formData.id,{
+			const response: AxiosResponse<any> = await imagesApi.put('/todos/'+formData.id,{
 				"todo": formData
 			});
-
-			console.log(response.data);
 			navigate('/');
 		}catch (error){
 			console.error(error);
 		}
 	};
+
+    const imagePreview = formData.attach ? <tr><td>プレビュー</td><td><img src={URL.createObjectURL(formData.attach)} className="imagePreview"alt="" /></td></tr>: <></>;
 
     return (
     <form onSubmit = {handleTodoCreate}>
@@ -99,8 +107,10 @@ export default function UpdateToDo(){
                 <td>メモ</td><td><textarea className = "TextArea" name="memo" placeholder={"補足事項(任意)"} onChange={handleInputChange} defaultValue= {formData.memo}/></td>
                 </tr>
                 <tr>
-                <td>添付ファイル</td><td><input type="file" name="attach"onChange={handleFileChange}/></td>
+                <td>添付ファイル</td><td><input type="file" name="attach_url"onChange={handleFileChange}/></td>
                 </tr>
+                {!imageUrl && imagePreview}
+                {imageUrl && <tr><td>プレビュー</td><td><img src={imageUrl} className="imagePreview"alt="" /></td></tr>}
                 <tr>
                 <td>URL</td><td><input className = "Text" type="text" name="url" placeholder={"補足URL(任意)"} id="input-url"onChange={handleInputChange} defaultValue = {formData.url}/></td>
                 </tr>
