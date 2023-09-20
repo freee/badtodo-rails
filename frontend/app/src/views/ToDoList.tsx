@@ -6,6 +6,7 @@ import axios from 'axios';
 import e from "express";
 import {Link} from 'react-router-dom'
 import WhatToDo from "./WhatToDo"
+import getHeaders from "../utils/getHeaders";
 
 interface ToDoInformationList{
     todos:ToDoInformation[];
@@ -44,8 +45,21 @@ export const ToDoList: React.FC = () => {
     const [queryData, setQueryData] = useState<queryInterface>(initialquery);
 
     useEffect(()=> {
-        fetch('http://localhost:3001/todos',{method:'GET'})
-        .then(res=>res.json())
+        fetch('http://localhost:3001/todos',{
+            method:'GET',
+            headers: getHeaders()
+        })
+        .then(res=>{
+            if (res.status == 401){
+                // loginにリダイレクト
+                window.location.href = "/login"
+                // エラーを投げる
+                throw new Error("Unauthorized")
+            }
+            else{
+                return res.json()
+            }
+        })
         .then(data=>{
             let information = data.map((todo:ToDoInformation,index:number)=>
             <tr key={index}>
@@ -57,7 +71,7 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.done?"完了":""}</td>
                 <td>{todo.attach}</td>
                 <td>{todo.public?"OK":""}</td>
-            </tr>
+            </tr>  
         )
         setFormData({
             todoTable: information,
@@ -77,7 +91,10 @@ export const ToDoList: React.FC = () => {
     const handleQuerySubmit = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
 
-        fetch('http://localhost:3001/todos?todo='+queryData.todo+'&isLike='+queryData.isLike,{method:'GET'})
+        fetch('http://localhost:3001/todos?todo='+queryData.todo+'&isLike='+queryData.isLike,{
+            method:'GET',
+            headers: getHeaders()
+        })
         .then(res=>res.json())
         .then(data=>{
             let information = data.map((todo:ToDoInformation,index:number)=>
