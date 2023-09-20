@@ -26,7 +26,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   def update
     if @todo.update(todo_params)
-      render json: @todo
+      render json: @todo , methods: [:attach_url]
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
