@@ -20,7 +20,7 @@ textarea{
 
 .Sub{
     align-items:center;
-    width:1000px;
+    width:1000px; 
     background-color: #fff;
 }
 .formTable{
@@ -46,11 +46,11 @@ th {
     border:1px solid #ddd;
     background-color: #cfcfcf;
  }
-
 td {
     padding:5px;
     font-size:18px;
     text-align:left;
+    width:50%;
     /* border:1px solid #ddd; */
  }
  

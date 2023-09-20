@@ -8,6 +8,7 @@ import ToDoList from "./ToDoList";
 import {useParams} from 'react-router'
 import api from '../api/axios'
 import {useNavigate} from 'react-router'
+import {ConvertMarkdown} from '../components/ConvertMarkdown';
 interface ToDoformData{
     id:string;
     todo:string;
@@ -59,7 +60,7 @@ export const WhatToDo: React.FC = () => {
                 <tr><td>登録日</td><td>{formData.c_date}</td></tr>
                 <tr><td>期限</td><td>{formData.due_date}</td></tr>
                 <tr><td>完了</td><td>{formData.done}</td></tr>
-                <tr><td>メモ</td><td>{formData.memo}</td></tr>
+                <tr><td>メモ</td><td><ConvertMarkdown markdownText={formData.memo}/></td></tr>
                 <tr><td>添付ファイル</td><td>{formData.attach}</td></tr>
                 <tr><td>URL</td><td>{formData.url}</td></tr>
                 <tr><td>公開</td><td>{formData.public}</td></tr>
