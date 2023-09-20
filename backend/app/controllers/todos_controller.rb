@@ -3,7 +3,14 @@ class TodosController < ApplicationController
 
   # GET /todos
   def index
-    @todos = Todo.all
+
+    if !params[:todo]
+      @todos = Todo.all
+    elsif params[:isLike] == "true"
+      @todos = Todo.where("user_id=1 AND todo LIKE '%#{params[:todo]}%'")
+    else
+      @todos = Todo.where("user_id=1 AND todo = '#{params[:todo]}'") 
+    end
 
     render json: @todos
   end

@@ -29,8 +29,20 @@ const initialToDoInformation: ToDoInformation={
     attach:'',
     public:false
 }
+
+interface queryInterface {
+    todo: string,
+    isLike : boolean
+}
+
+const initialquery: queryInterface = {
+    todo: "",
+    isLike: false
+}
 export const ToDoList: React.FC = () => {
 	const [formData, setFormData] = useState<ToDoInformationList>({todos:[],todoTable:[]});
+    const [queryData, setQueryData] = useState<queryInterface>(initialquery);
+
     useEffect(()=> {
         fetch('http://localhost:3001/todos',{method:'GET'})
         .then(res=>res.json())
@@ -48,24 +60,53 @@ export const ToDoList: React.FC = () => {
             </tr>
         )
         setFormData({
-            ...formData,
             todoTable: information,
             todos: data
         })
         })
     },[]);
-	const handleInputChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-	) => {
-		const { name, value } = event.target;
-		setFormData({
-			...formData,
-			[name]:value,
-		});
-	};
+
+    const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        const { name, value} = event.target;
+        setQueryData({
+            ...queryData,
+            [name]: value
+        });
+    };
+
+    const handleQuerySubmit = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+
+        fetch('http://localhost:3001/todos?todo='+queryData.todo+'&isLike='+queryData.isLike,{method:'GET'})
+        .then(res=>res.json())
+        .then(data=>{
+            let information = data.map((todo:ToDoInformation,index:number)=>
+            <tr key={index}>
+                <td><input type="checkbox"/></td>
+                <td>{todo.id}</td>
+                <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
+                <td>{todo.c_date}</td>
+                <td>{todo.due_date}</td>
+                <td>{todo.done?"完了":""}</td>
+                <td>{todo.attach}</td>
+                <td>{todo.public?"OK":""}</td>
+            </tr>
+        )
+        setFormData({
+            todoTable: information,
+            todos: data
+        })
+        })
+    }
+
     return(
         <form>
-            <div className="search"><input type="text"/><button>検索</button>あいまい検索<input type="checkbox"/></div>
+            <div className="search">
+                <input name="todo" type="text" onChange={handleQueryChange}/>
+                <button onClick={handleQuerySubmit}>検索</button>
+                あいまい検索
+                <input name="isLike" type="checkbox" onChange={(e) => setQueryData({...queryData, isLike: e.target.checked })}/>
+            </div>
             <table id="data-table">
                 <thead><tr><th><input type="checkbox"/></th><th>ID</th><th>todo</th><th>登録日</th><th>期限</th><th>完了</th><th>添付ファイル</th><th>公開</th></tr></thead>
             <tbody>{formData.todoTable}</tbody>
