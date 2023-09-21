@@ -1,4 +1,3 @@
-import UserField from "../components/UserField"
 import {useState} from "react"
 import api from "../api/axios";
 import { AxiosResponse } from "axios";
@@ -44,7 +43,6 @@ export const Login:React.FC<any>=({setLoggedIn,setIsAdmin,setUserId})=>{
             setLoggedIn(true);
             setIsAdmin(response.data.data["is_admin"]);
             setUserId(response.data.data.id);
-			navigate('/');
 		}catch (error){
 			console.error(error);
 		}
