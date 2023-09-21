@@ -4,8 +4,8 @@ const getHeaders = () => {
         const token = JSON.parse(atob(storedToken));
         console.log(token);
         const params = { 
-            uid: `${token["uid"]}`,
-            client: `${token["client"]}`,
+            "uid": `${token["uid"]}`,
+            "client": `${token["client"]}`,
             "access-token": `${token["access-token"]}`
         }
     

@@ -39,7 +39,7 @@ const initialToDoformData: ToDoformData={
     public:false,
     user_id:1
 }
-export default function UpdateToDo(){
+export default function UpdateToDo(props:any){
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
     const [imageUrl,setImageUrl] = useState<string>('');
@@ -58,6 +58,7 @@ export default function UpdateToDo(){
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
+        console.log(event.type);
 		const { name, value } = event.target;
 		setFormData({
 			...formData,
@@ -80,8 +81,6 @@ export default function UpdateToDo(){
 			const response: AxiosResponse<any> = await imagesApi.put('/todos/'+formData.id,{
 				"todo": formData
 			});
-
-			console.log(response.data);
 			navigate('/');
 		}catch (error){
 			console.error(error);
