@@ -1,16 +1,18 @@
+require 'uri'
+
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show update destroy ]
   before_action :authenticate_user!, only: %i[ index ]
 
   # GET /todos
   def index
-    # logger.debug(current_user.id)
     if !params[:todo]
       @todos = Todo.where("public=true")
     elsif params[:isLike] == "true"
       @todos = Todo.where("public=true AND todo LIKE '%#{params[:todo]}%'")
     else
-      @todos = Todo.where("public=true AND todo = '#{params[:todo]}'") 
+      @todos = Todo.where("public=true AND todo = '#{params[:todo]}'")
+
     end
 
     render json: @todos, methods: [:attach_url]

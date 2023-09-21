@@ -94,7 +94,7 @@ export const ToDoList: React.FC = () => {
     const handleQuerySubmit = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
 
-        fetch('http://localhost:3001/todos?todo='+queryData.todo+'&isLike='+queryData.isLike,{
+        fetch('http://localhost:3001/todos?todo='+encodeURIComponent(queryData.todo)+'&isLike='+queryData.isLike,{
             method:'GET',
             headers: getHeaders()
         })
