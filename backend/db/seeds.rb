@@ -15,6 +15,7 @@ user3 = User.new(email: 'test3@example.com', password: 'hugahuga')
 user3.save!
 user4 = User.new(email: 'test4@example.com', password: 'hugahuga')
 user4.save!
+user5 = User.new(email: 'admin@example.com', password:  'hugahuga', is_admin: true)
 
 # todosテーブルのseedデータ
 Todo.create!(todo: "Todo 1", c_date: Date.today, due_date: Date.today + 7, done: 0, memo: "Memo 1", org_filename: "file1.jpg", real_filename: "file1.jpg", url: "https://example.com", url_text: "Link 1", public: true, user_id: user1.id)
