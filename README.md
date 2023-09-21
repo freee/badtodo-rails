@@ -1,15 +1,13 @@
 ##  インストール手順
-任意のディレクトリに移動し、リポジトリをcloneしてください。
+任意のディレクトリに移動し、リポジトリをdevelopブランチからcloneしてください。
 その後、下記コマンドを実行し、dockerコンテナを起動します。
 ```
 docker compose up -d
 ```
 dockerコンテナが起動されていることを確認したのちに、下記コマンドを実行します。
-このコマンドは、DBの初期化および初期値の設定を行います。
+このコマンドは、DBの初期化および初期値の設定を行う命令が書かれたstartup.shを起動するコマンドです。
 ```
-docker compose exec api rails db:create
-docker compose exec api rails db:migrate
-docker compose exec api rails db:seed
+sh startup.sh
 ```
 
 ##  システム構成
@@ -20,6 +18,7 @@ api:      localhost:3001で動作するrailsアプリケーション(APIモー�
 db:       localhost:3307で動作するmysqlデータベース  
 
 ##  機能説明
+
 ### frontend
 #### ナビゲーションバー
 - ログイン前：一覧、新規追加、お問い合わせ、ログイン
@@ -43,12 +42,33 @@ db:       localhost:3307で動作するmysqlデータベース
 - 管理者権限を持っている場合に限り、登録している全ユーザのID,パスワード、メールアドレス、アイコン、種別
 #### Todo show
 - todoのID、todoの内容、todoの登録日、todoに設定している期限、完了しているかどうか、todoに関する添付ファイル、todoに関するメモ、todoを説明するためのURL、登録したtodoを他ユーザに登録するかどうかを表示する
-### backend  
+
+
+### backend
+フロントエンドからのリクエストを受け取り、結果を返すAPIとしての機能
+#### TodoリストAPI
 - GET /todos : 一覧表示アクション (index)
 - POST /todos : 新規作成アクション (create)
 - GET /todos/:id : 詳細表示アクション (show)
 - PATCH/PUT /todos/:id : 更新アクション (update)
 - DELETE /todos/:id : 削除アクション (destroy)
+#### 認証API
+devise-token-authにて実装
+- POST /auth : ユーザー新規登録
+- POST /auth/sign_in : ログイン
+- DELETE /auth/sign_out : ログアウト
+- GET /auth/validate_token : トークンの有効性確認
+
+[詳細な認証APIの仕様](https://devise-token-auth.gitbook.io/devise-token-auth/usage)
+
+
 ## 脆弱性一覧
+
+脆弱性の詳細と対策の答え合わせは[Answer.md](Answer.md)を参照してください。
+
 ### XSS
 ### SQLインジェクション
+#### 概要
+SQLインジェクションとは、Webアプリケーションにおいて、不正なSQL文を実行させる攻撃のことです。クライアントから送られてきたデータをそのままSQL文に埋め込んでしまうと、SQL文を改竄されてしまう可能性があります。
+
+
