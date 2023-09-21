@@ -13,22 +13,27 @@ type NavbarProps = {
   return (
     <nav>
       <ul  className='topnav'>
-        <li>
-          <Link to="/">一覧</Link>
-        </li>
-		<li>
-			<Link to="/new-todo">新規追加</Link>
-		</li>
-		<li>
-			<Link to="/contact">お問い合わせ</Link>
-		</li>
         {!loggedIn && (
-			<li>
-				<Link to="/login">ログイン</Link>
-			</li>
+			<>
+				<li>
+					<Link to="/">ログイン</Link>
+				</li>
+				<li>
+					<Link to="/contact">お問い合わせ</Link>
+				</li>
+			</>
         )}
         {loggedIn && (
 			<>
+				<li>
+					<Link to="/">一覧</Link>
+				</li>
+				<li>
+					<Link to="/new-todo">新規追加</Link>
+				</li>
+				<li>
+					<Link to="/contact">お問い合わせ</Link>
+				</li>
 				<li>
 					<Link to="/mypage">マイページ</Link>
 				</li>
