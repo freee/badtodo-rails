@@ -54,8 +54,6 @@ export const Register: React.FC<RegisterProps> = ({isAdmin}) => {
 			const response: AxiosResponse<any> = await api.post('/auth',{
 				...formData
 			});
-
-			console.log(response.data);
 			navigate('/');
 		}catch (error){
 			console.error(error);

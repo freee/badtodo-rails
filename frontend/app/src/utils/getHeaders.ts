@@ -1,4 +1,4 @@
-const addHeaders = () => {
+const getHeaders = () => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
         const token = JSON.parse(atob(storedToken));
@@ -13,4 +13,4 @@ const addHeaders = () => {
     }   
 }
 
-export default addHeaders;
+export default getHeaders;
