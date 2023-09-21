@@ -51,8 +51,6 @@ export const ToDoList: React.FC = () => {
         })
         .then(res=>{
             if (res.status == 401){
-                // loginにリダイレクト
-                window.location.href = "/login"
                 // エラーを投げる
                 throw new Error("Unauthorized")
             }
@@ -71,13 +69,18 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.done?"完了":""}</td>
                 <td>{todo.attach_url && (<a href={todo.attach_url}>{todo.attach_url.match(/([^/]+?)?$/)?.[0].slice(0,25)}</a>)}</td>
                 <td>{todo.public?"OK":""}</td>
-            </tr>  
-        )
-        setFormData({
-            todoTable: information,
-            todos: data
+            </tr> 
+            )
+            setFormData({
+                todoTable: information,
+                todos: data
+            })
         })
+        .catch((error: any) => {
+            window.location.href = "/login"
         })
+
+        
     },[]);
 
     const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
