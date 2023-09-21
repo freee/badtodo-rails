@@ -5,7 +5,7 @@ import Inquery from '../views/Inquery';
 import NewToDo from '../views/NewToDo';
 import Profile from '../views/Profile';
 import ToDoList from '../views/ToDoList';
-import UserListView from '../views/UserListView';
+import UserListView from '../views/admin/UserListView';
 import Login from '../views/Login';
 import WhatToDo from '../views/WhatToDo'
 import UpdateToDo from '../views/UpdateToDo';
