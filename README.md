@@ -22,4 +22,9 @@ db:       localhost:3307で動作するmysqlデータベース
 ##  機能説明
 ### frontend
 
-### backend
+### backend  
+
+## 脆弱性一覧
+### XSS  
+
+### SQLインジェクション
