@@ -1,9 +1,7 @@
-import React from "react"
 import {useEffect} from "react";
 import { AxiosResponse } from "axios";
 import {useState} from "react"
 import api from '../api/axios'
-import { userInfo } from "os";
 import {useParams} from 'react-router'
 import '../assets/TextArea.css'
 interface userInformation{
@@ -23,29 +21,11 @@ const InitialuserInformation : userInformation = {
     image:'',
     is_admin:false
 }
-interface userInformationList{
-    users:userInformation[];
-}
+
 export default function Profile(props:any){
-    const {id} = useParams<Params>();;
     const [formData,setFormData] = useState<userInformation>(InitialuserInformation);
-    // useEffect(()=>{
-    //     console.log(id);
-    //     fetch('http://localhost:3001/users/'+props.userId,{method:'GET'})
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         let information = data.map((todo:userInformation,index:number)=>
-    //             {
-    //             if(Number(todo.id) == Number(id)){ setFormData(todo)}
-    //             else {console.log(todo.id)}
-    //             }
-    //     )
-    //     })
-    //     },
-    // []);
     useEffect(()=>{
         async function fetchData(){
-            console.log(props.userId);
             const response: AxiosResponse<any> = await api.get('/users/'+props.userId);
             setFormData(response.data);
             return response;
@@ -66,4 +46,3 @@ export default function Profile(props:any){
             </form>
     );
 }
-///

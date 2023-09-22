@@ -1,11 +1,8 @@
-import { prependOnceListener } from "process";
 import React from 'react';
-import {useState,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import '../assets/TextArea.css'
-import axios from 'axios';
 import e from "express";
 import {Link} from 'react-router-dom'
-import WhatToDo from "./WhatToDo"
 import getHeaders from "../utils/getHeaders";
 
 interface ToDoInformationList{

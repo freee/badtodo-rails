@@ -68,7 +68,6 @@ export default function NewToDo(props:any){
 				"todo": formData
 			});
 
-			console.log(response.data);
 			navigate('/');
 		}catch (error){
 			console.error(error);

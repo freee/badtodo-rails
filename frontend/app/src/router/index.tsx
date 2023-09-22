@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import  Home  from '../views/Home';
 import Register from '../views/Register';
 import Inquery from '../views/Inquery';
 import NewToDo from '../views/NewToDo';
