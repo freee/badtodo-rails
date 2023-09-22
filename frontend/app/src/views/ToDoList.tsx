@@ -7,6 +7,7 @@ import e from "express";
 import {Link} from 'react-router-dom'
 import WhatToDo from "./WhatToDo"
 import DeleteToDo from "../components/DeleteToDo";
+import { isConstructorDeclaration } from "typescript";
 
 interface ToDoInformationList{
     todos:ToDoInformation[];
@@ -43,7 +44,7 @@ export const ToDoList: React.FC = () => {
             <tr key={index}>
                 <td> <input
                         type="checkbox"
-                        checked = {isChecked.includes(index)?true:false} onChange={(e)=>handleCheck(e,index)}
+                        checked={isChecked.includes(index)} onChange={(e)=>handleCheck(e,index)}
                     /></td>
                 <td>{todo.id}</td>
                 <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
@@ -54,18 +55,13 @@ export const ToDoList: React.FC = () => {
                 <td>{todo.public?"OK":""}</td>
             </tr>
         )
-        // setFormData({
-        //     ...formData,
-        //     todoTable: information,
-        //     todos: data
-        // })
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            todos: data,
+        setFormData({
+            ...formData,
             todoTable: information,
-          }));
+            todos: data
         })
-    },[]);
+        })
+    },[isChecked]);
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
@@ -75,12 +71,19 @@ export const ToDoList: React.FC = () => {
 			[name]:value,
 		});
 	};
-    const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
-        const updatedTodos = isChecked;
-        if(!updatedTodos.includes(index))updatedTodos.push(index);
-        console.log(updatedTodos)
-        setIsChecked(updatedTodos);
-    };
+const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const updatedTodos = isChecked;//[...isChecked]; // isChecked配列のコピーを作成
+  if (!updatedTodos.includes(index)) {
+    updatedTodos.push(index);
+  } else {
+    const indexToRemove = updatedTodos.indexOf(index);
+    updatedTodos.splice(indexToRemove, 1);
+  }
+  console.log(updatedTodos);
+  console.log(e.target);
+  e.target.checked = !e.target.checked; // チェックボックスの状態を更新
+  setIsChecked(updatedTodos);
+};
     return(
         <form className="Sub">
             <div className="search"><input type="text"/><button>検索</button>あいまい検索<input type="checkbox"/></div>

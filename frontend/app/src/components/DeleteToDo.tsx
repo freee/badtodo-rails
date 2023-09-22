@@ -11,26 +11,17 @@ const DeleteToDo:React.FC<ToDoformData> = (ToDoTable) => {
     console.log("this time ");
     console.log(ToDoTable.table);
     console.log(ToDoTable.deletelist);
-    // for(let cols of ToDoTable.table){
-    //     //if(cols.props.children[0].checked){todoTable.push(cols.props.children[1].props.children);
-    //     console.log(cols.props.children[0].props.children[1].props.checked);
-    // }
-    const deleteTodo = async (data:number[]) => {
+    const deleteTodo = async (data: number[]) => {
         console.log("deletelist");
         console.log(ToDoTable.deletelist);
-        // for(let i = 0;i<ToDoTable.deletelist.length;i++){
-        //     let col = ToDoTable.table[ToDoTable.deletelist[i]];
-        //     todoTable.push(col.props.children[1].props.children);
-        // }
-        // for(let todo of todoTable){
-        //     try{
-        //         const response = await api.delete('/todos/'+todo);
-        //         console.log(response);
-        //     }catch(e){
-        //         console.error(e);
-        //     }
-        // }
-    }
+        const promises = ToDoTable.deletelist.map((index) => {
+          let col = ToDoTable.table[index];
+          const todo = col.props.children[1].props.children;
+          return api.delete('/todos/' + todo);
+        });
+        await Promise.all(promises);
+        console.log("All todos deleted");
+      };
     return (<button onClick={()=>deleteTodo(todoTable)}>削除</button>);
 }
 
