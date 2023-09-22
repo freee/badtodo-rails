@@ -1,9 +1,20 @@
+require 'uri'
+
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show update destroy ]
+  before_action :authenticate_user!, only: %i[ index ]
 
   # GET /todos
   def index
-    @todos = Todo.all 
+    if !params[:todo]
+      @todos = Todo.where("public=true")
+    elsif params[:isLike] == "true"
+      @todos = Todo.where("public=true AND todo LIKE '%#{params[:todo]}%'")
+    else
+      @todos = Todo.where("public=true AND todo = '#{params[:todo]}'")
+
+    end
+
     render json: @todos, methods: [:attach_url]
   end
 
@@ -38,10 +49,10 @@ class TodosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_todo
-      @todo = Todo.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_todo
+    @todo = Todo.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
     def todo_params

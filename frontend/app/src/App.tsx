@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Router from './router/index';
 import {Navbar} from './components/Navbar';
+import { useNavigate } from 'react-router-dom';
 import api from './api/axios';
 import { resolveTripleslashReference } from 'typescript';
 
@@ -10,6 +11,7 @@ function App() {
   const [loggedIn,setLoggedIn] = useState(false);
   const [isAdmin,setIsAdmin] = useState(false);
   const [userId,setUserId] = useState(0);
+  const navigate = useNavigate();
   useEffect(()=>{
     (async()=>{
       try {
@@ -31,11 +33,12 @@ function App() {
             setLoggedIn(true);
           };
         }
+        navigate('/');
       }catch(e){
         console.error(e);
       }
     })();
-  },[]);
+  },[loggedIn]);
   
 
   return (

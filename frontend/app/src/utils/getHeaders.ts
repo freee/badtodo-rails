@@ -1,11 +1,11 @@
-const addHeaders = () => {
+const getHeaders = () => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
         const token = JSON.parse(atob(storedToken));
         console.log(token);
         const params = { 
-            uid: `${token["uid"]}`,
-            client: `${token["client"]}`,
+            "uid": `${token["uid"]}`,
+            "client": `${token["client"]}`,
             "access-token": `${token["access-token"]}`
         }
     
@@ -13,4 +13,4 @@ const addHeaders = () => {
     }   
 }
 
-export default addHeaders;
+export default getHeaders;
