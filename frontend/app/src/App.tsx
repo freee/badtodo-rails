@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Router from './router/index';
 import {Navbar} from './components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import api from './api/axios';
-import { resolveTripleslashReference } from 'typescript';
 
 function App() {
   const [loggedIn,setLoggedIn] = useState(false);
@@ -18,7 +16,6 @@ function App() {
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
           const token = JSON.parse(atob(storedToken));
-          console.log(token);
 
           const response = await api.get('/auth/validate_token', {
               params: {

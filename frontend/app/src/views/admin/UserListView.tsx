@@ -13,7 +13,6 @@ type User = {
 }
 
 const UserListView:React.FC = () => {
-    //todo 値を取ってくる処理
     const [formData,setFormData] = useState<User[]>([]);
     useEffect(()=>{
         async function fetchData(){

@@ -1,10 +1,7 @@
-import { prependOnceListener } from "process";
 import React from 'react';
 import {useState,useEffect} from 'react';
 import '../assets/TextArea.css'
 import {AxiosResponse} from 'axios'
-import e from "express";
-import ToDoList from "./ToDoList";
 import {useParams} from 'react-router'
 import api from '../api/axios'
 import {useNavigate} from 'react-router'
@@ -44,7 +41,7 @@ export const WhatToDo: React.FC = () => {
     useEffect(()=>{
         async function fetchData(){
             const response: AxiosResponse<any> = await api.get('/todos/'+id);
-            setFormData(response.data);console.log(response.data);
+            setFormData(response.data);
             if(response.data.attach_url !== null){
                 setImageUrl(response.data.attach_url);
             }

@@ -1,13 +1,9 @@
-import { prependOnceListener } from "process";
 import React from 'react';
-import {useState,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import '../assets/TextArea.css'
-import axios from 'axios';
 import e from "express";
 import {Link} from 'react-router-dom'
-import WhatToDo from "./WhatToDo"
 import DeleteToDo from "../components/DeleteToDo";
-import { isConstructorDeclaration } from "typescript";
 import getHeaders from "../utils/getHeaders";
 
 interface ToDoInformationList{
@@ -66,7 +62,7 @@ export const ToDoList: React.FC = () => {
         .then(data=>{
             let information = data.map((todo:ToDoInformation,index:number)=>
             <tr key={index}>
-                <td><input type="checkbox"/></td>
+                <td><input type="checkbox" onChange={(e)=>handleCheck(e,index)}/></td>
                 <td>{todo.id}</td>
                 <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
                 <td>{todo.c_date}</td>
@@ -126,27 +122,14 @@ export const ToDoList: React.FC = () => {
         })
         })
     }
-	const handleInputChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-	) => {
-		const { name, value } = event.target;
-		setFormData({
-			...formData,
-			[name]:value,
-		});
-	};
 const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-  const updatedTodos = isChecked;//[...isChecked]; // isChecked配列のコピーを作成
+  const updatedTodos = isChecked;
   if (!updatedTodos.includes(index)) {
     updatedTodos.push(index);
   } else {
     const indexToRemove = updatedTodos.indexOf(index);
     updatedTodos.splice(indexToRemove, 1);
   }
-  console.log(isChecked.includes(index));
-  console.log(updatedTodos);
-  console.log(e.target);
-  //e.target.checked = !e.target.checked; // チェックボックスの状態を更新
   setIsChecked(updatedTodos);
 };
     return(
@@ -162,7 +145,6 @@ const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
             <tbody>{formData.todoTable}</tbody>
             </table><br/>
                     <DeleteToDo table={formData.todoTable} deletelist={isChecked}/> 
-                    {/* <button type="button" name="process" value="dellist" onClick = {()=>DeleteToDo(formData.todoTable)}>削除</button> */}
                     <button type="submit" name="process" value="donelist">完了</button>
                     <button type="submit" name="process" value="exportlist">エクスポート</button>
         </form>

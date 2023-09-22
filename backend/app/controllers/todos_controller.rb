@@ -7,11 +7,11 @@ class TodosController < ApplicationController
   # GET /todos
   def index
     if !params[:todo]
-      @todos = Todo.where("public=true")
+      @todos = Todo.where("public=true OR user_id=#{current_user.id}")
     elsif params[:isLike] == "true"
-      @todos = Todo.where("public=true AND todo LIKE '%#{params[:todo]}%'")
+      @todos = Todo.where("(public=true OR user_id=#{current_user.id}) AND todo LIKE '%#{params[:todo]}%' ")
     else
-      @todos = Todo.where("public=true AND todo = '#{params[:todo]}'")
+      @todos = Todo.where("(public=true OR user_id=#{current_user.id}) AND todo = '#{params[:todo]}'")
 
     end
 

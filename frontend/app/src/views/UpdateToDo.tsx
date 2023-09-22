@@ -1,10 +1,8 @@
-import { prependOnceListener } from "process";
 import React from 'react';
 import {useState,useEffect} from 'react';
 import '../assets/TextArea.css'
 import {AxiosResponse} from 'axios'
 import e from "express";
-import ToDoList from "./ToDoList";
 import {useParams} from 'react-router'
 import api ,{ imagesApi } from '../api/axios'
 import {useNavigate} from 'react-router'
@@ -39,7 +37,7 @@ const initialToDoformData: ToDoformData={
     public:false,
     user_id:1
 }
-export default function UpdateToDo(props:any){
+export default function UpdateToDo(){
     const {id} =  useParams<Params>();
     const [formData, setFormData] = useState<ToDoformData>(initialToDoformData);
     const [imageUrl,setImageUrl] = useState<string>('');
@@ -58,7 +56,6 @@ export default function UpdateToDo(props:any){
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
-        console.log(event.type);
 		const { name, value } = event.target;
 		setFormData({
 			...formData,
@@ -68,7 +65,6 @@ export default function UpdateToDo(props:any){
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setImageUrl('');
 		const file = event.target.files && event.target.files[0];
-        console.log(imageUrl)
 		setFormData({
 			...formData,
 			attach:file || null,
@@ -76,7 +72,6 @@ export default function UpdateToDo(props:any){
 	};
     const handleTodoCreate = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(formData)
 		try{
 			const response: AxiosResponse<any> = await imagesApi.put('/todos/'+formData.id,{
 				"todo": formData

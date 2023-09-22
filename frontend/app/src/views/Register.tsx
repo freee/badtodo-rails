@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { AxiosResponse } from 'axios';
-import { appendFile } from 'fs';
 
 interface FormState {
 	userId: string;
