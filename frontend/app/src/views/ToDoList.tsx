@@ -44,7 +44,7 @@ export const ToDoList: React.FC = () => {
             <tr key={index}>
                 <td> <input
                         type="checkbox"
-                        checked={isChecked.includes(index)} onChange={(e)=>handleCheck(e,index)}
+                        onChange={(e)=>handleCheck(e,index)}
                     /></td>
                 <td>{todo.id}</td>
                 <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
@@ -61,7 +61,7 @@ export const ToDoList: React.FC = () => {
             todos: data
         })
         })
-    },[isChecked]);
+    },[]);
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
@@ -79,9 +79,10 @@ const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const indexToRemove = updatedTodos.indexOf(index);
     updatedTodos.splice(indexToRemove, 1);
   }
+  console.log(isChecked.includes(index));
   console.log(updatedTodos);
   console.log(e.target);
-  e.target.checked = !e.target.checked; // チェックボックスの状態を更新
+  //e.target.checked = !e.target.checked; // チェックボックスの状態を更新
   setIsChecked(updatedTodos);
 };
     return(
