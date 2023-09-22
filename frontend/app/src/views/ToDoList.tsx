@@ -62,7 +62,7 @@ export const ToDoList: React.FC = () => {
         .then(data=>{
             let information = data.map((todo:ToDoInformation,index:number)=>
             <tr key={index}>
-                <td><input type="checkbox"/></td>
+                <td><input type="checkbox" onChange={(e)=>handleCheck(e,index)}/></td>
                 <td>{todo.id}</td>
                 <td><Link to ={'/what-todo/'+todo.id} state={todo.id}>{todo.todo}</Link></td>
                 <td>{todo.c_date}</td>
