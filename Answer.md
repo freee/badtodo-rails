@@ -13,22 +13,24 @@ Todoリスト一覧画面においては公開可能と設定されたTodoリス
 
 Railsのコードは以下のようになっています。
 ```ruby
-@todos = Todo.where("title = '#{params[:todo]}'")
+@todos = Todo.where("public=true AND title='#{params[:todo]}'")
 ```
 これにより以下のようなSQL文が実行されることになります。
 ```sql
-SELECT "todos".* FROM "todos" WHERE (title = '検索文字列')
+SELECT "todos".* FROM "todos" WHERE (public=true AND title='検索文字列')
 ```
 そのため検索文字列に`' OR 'a'='a`を入力すると、SQL文が
 ```sql
-SELECT "todos".* FROM "todos" (title = '' OR 'a'='a')
+SELECT "todos".* FROM "todos" (public=true AND title='' OR 'a'='a')
 ```
 となり、全てのTodoリストが表示されてしまいます。
+
+
 
 #### 対策
 Railsでは、SQL文に埋め込む文字列を`?`で指定することで、SQLインジェクションを防ぐことができます。
 ```ruby
-@todos = Todo.where("title = ?", params[:todo])
+@todos = Todo.where("public=true AND  title = ?", params[:todo])
 ```
 
 この記述方法では内部で文字列がサニタイズされて`'`が`''`に置き換わり攻撃を防ぐことができます。
