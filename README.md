@@ -1,13 +1,76 @@
-# non_business_use_template
-業務用途外のリポジトリを作成する際のテンプレートリポジトリです
+##  インストール手順
+任意のディレクトリに移動し、リポジトリをdevelopブランチからcloneしてください。
+その後、下記コマンドを実行し、dockerコンテナを起動します。
+```
+docker compose up -d
+```
+dockerコンテナが起動されていることを確認したのちに、下記コマンドを実行します。
+このコマンドは、DBの初期化および初期値の設定を行う命令が書かれたstartup.shを起動するコマンドです。
+```
+sh startup.sh
+```
 
-業務用途外のリポジトリの場合は、リポジトリのtopic に `non-business-use` を必ずつけてください。
+##  システム構成
+このアプリケーションは、以下の構成で動作します。
 
-topicの付け方については [Adding topics to your repository](https://docs.github.com/en/enterprise-cloud@latest/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository) を参照してください。
+frontend: localhost:3000で動作するReactアプリケーション  
+api:      localhost:3001で動作するrailsアプリケーション(APIモードで動作します)  
+db:       localhost:3307で動作するmysqlデータベース  
+
+##  機能説明
+
+### frontend
+#### ナビゲーションバー
+- ログイン前：一覧、新規追加、お問い合わせ、ログイン
+- ログイン後：一覧、新規追加、お問い合わせ、マイページ、ログアウト
+#### ログイン処理
+- 登録したメールアドレスとパスワードを入力して認証する。
+- アクセストークンを発行して、ローカルストレージに保管する。
+#### アクセス制御
+- ログイン処理で発行したアクセストークンを使用してアクセスの制御をする。
+#### ログアウト処理
+- ローカルストレージにあるアクセストークンをバックエンドに渡し、トークン情報をローカルストレージから破棄する
+#### 問い合わせ画面
+- 問い合わせをするための画面を表示（問い合わせ処理は未実装）
+#### Todo新規作成画面
+- todo,期限、他ユーザに公開するかどうか、メモ、添付ファイル、URL,URLの表示タイトルを入力して登録する
+#### MyPage画面
+- ログインしたユーザのID、メールアドレス、パスワード、アイコン、種別を表示する
+#### TodoList画面
+- 自分のtodo一覧や公開設定している他ユーザのtodo一覧を表示する
+#### UserList画面
+- 管理者権限を持っている場合に限り、登録している全ユーザのID,パスワード、メールアドレス、アイコン、種別
+#### Todo show
+- todoのID、todoの内容、todoの登録日、todoに設定している期限、完了しているかどうか、todoに関する添付ファイル、todoに関するメモ、todoを説明するためのURL、登録したtodoを他ユーザに登録するかどうかを表示する
 
 
-## 重要事項
+### backend
+フロントエンドからのリクエストを受け取り、結果を返すAPIとしての機能
+#### TodoリストAPI
+- GET /todos : 一覧表示アクション (index)
+- POST /todos : 新規作成アクション (create)
+- GET /todos/:id : 詳細表示アクション (show)
+- PATCH/PUT /todos/:id : 更新アクション (update)
+- DELETE /todos/:id : 削除アクション (destroy)
+#### 認証API
+devise-token-authにて実装
+- POST /auth : ユーザー新規登録
+- POST /auth/sign_in : ログイン
+- DELETE /auth/sign_out : ログアウト
+- GET /auth/validate_token : トークンの有効性確認
 
-業務用途外のリポジトリは Repository Governance の対象外です。
-つまり、 https://github.com/C-FO/freee-developers-auth (terraform）では管理しません。
-何かあっても誰も責任は取れませんので、リポジトリオーナーが自己責任で管理してください。
+[詳細な認証APIの仕様](https://devise-token-auth.gitbook.io/devise-token-auth/usage)
+
+
+## 脆弱性一覧
+
+脆弱性の詳細と対策の答え合わせは[Answer.md](Answer.md)を参照してください。
+
+### XSS
+#### 概要
+XSSとは，悪意あるコードをWebページのユーザに実行させる攻撃のことでず。ユーザの入力をそのままHTMLに埋め込んでしまうと発生する可能性があります。
+### SQLインジェクション
+#### 概要
+SQLインジェクションとは、Webアプリケーションにおいて、不正なSQL文を実行させる攻撃のことです。クライアントから送られてきたデータをそのままSQL文に埋め込んでしまうと、SQL文を改竄されてしまう可能性があります。
+
+
