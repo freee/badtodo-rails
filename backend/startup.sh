@@ -1,3 +1,4 @@
 bundle install
-rails server -b 0.0.0.0
-rails db:create
+bin/rails db:create
+bin/rails db:migrate
+bin/rails server -b 0.0.0.0
