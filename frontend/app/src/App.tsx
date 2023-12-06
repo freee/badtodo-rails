@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="Sub">
-      <h1>Worst Todo</h1>
+      <h1>Bad Todo List</h1>
       <Navbar loggedIn={loggedIn} isAdmin={isAdmin} />
       <Router loggedIn={loggedIn} isAdmin={isAdmin} userId={userId} setLoggedIn={setLoggedIn} setIsAdmin={setIsAdmin} setUserId={{setUserId}}/>
       <br/>
