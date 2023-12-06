@@ -23,7 +23,8 @@ COPY startup.sh /startup.sh
 RUN chmod 777 /startup.sh
 
 RUN groupadd -g 1002 app \
-  && useradd -m -u 1001 -g 1002 app
+  && useradd -m -u 1001 -g 1002 app \
+  && chown -R app:app /api
 USER app
 
 CMD ["/startup.sh"]
