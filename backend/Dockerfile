@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:3.2.2
 
 ARG RUBYGEMS_VERSION=3.4.19
 
@@ -10,8 +10,8 @@ COPY Gemfile /api/Gemfile
 
 COPY Gemfile.lock /api/Gemfile.lock
 
-RUN gem update --system ${RUBYGEMS_VERSION} && \
-    bundle install
+RUN gem update --system ${RUBYGEMS_VERSION} \
+  && bundle install
 
 COPY . /api
 
